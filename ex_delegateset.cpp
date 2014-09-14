@@ -24,13 +24,18 @@ class MyCustomClass
 
 int main(int argc, char *argv[])
 {
-    EasyDelegate::DelegateSet<unsigned int, char*, float, double> myDelegateSet;
-
     // You can typedef the actual delegate type to some type that's specific to your project
-    myDelegateSet.push_back(new EasyDelegate::StaticDelegate<unsigned int, char*, float, double>(myStaticMethod));
+    typedef EasyDelegate::DelegateSet<unsigned int, char*, float, double> MyEventType;
 
+    MyEventType myDelegateSet;
     MyCustomClass *myCustomClassInstance = new MyCustomClass();
-    myDelegateSet.push_back(new EasyDelegate::MemberDelegate<MyCustomClass, unsigned int, char*, float, double>(myCustomClassInstance, &MyCustomClass::myMemberMethod));
+
+    // Register both our static function and our member function
+    myDelegateSet.push_back(new MyEventType::StaticDelegateType(myStaticMethod));
+    myDelegateSet.push_back(new MyEventType::MemberDelegateType<MyCustomClass>(myCustomClassInstance, &MyCustomClass::myMemberMethod));
+
+    // This form works too.
+    myDelegateSet += new MyEventType::StaticDelegateType(myStaticMethod);
 
     // Call the set via .invoke(), ignoring return values
     std::cout << "------------- CALLING VIA .invoke() ---------------" << std::endl;
@@ -38,15 +43,15 @@ int main(int argc, char *argv[])
 
     // Call the set via .invoke(), collecting returns into an std::vector
     std::cout << "------------- CALLING VIA .invoke(), Getting Returns ---------------" << std::endl;
-    std::vector<unsigned int> myReturnValues;
+    std::vector<MyEventType::ReturnType> myReturnValues;
     myDelegateSet.invoke(myReturnValues, "Foo", 3.14, 3.14159);
 
-    for (std::vector<unsigned int>::iterator it = myReturnValues.begin(); it != myReturnValues.end(); it++)
+    for (std::vector<MyEventType::ReturnType>::iterator it = myReturnValues.begin(); it != myReturnValues.end(); it++)
         std::cout << *it << std::endl;
 
     // Iterate on our own, calling invoke() for each delegate
     std::cout << "------- CUSTOM ITERATION --------" << std::endl;
-    for (EasyDelegate::DelegateSet<unsigned int, char*, float, double>::iterator it = myDelegateSet.begin(); it != myDelegateSet.end(); it++)
+    for (MyEventType::iterator it = myDelegateSet.begin(); it != myDelegateSet.end(); it++)
         std::cout << (*it)->invoke("Foo", 3.14, 3.14159) << std::endl;
 
     return 0;
