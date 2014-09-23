@@ -86,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h1><a class="anchor" id="Example"></a>
 Example</h1>
 <p>This quick example below demonstrates how simple it is to utilize the <a class="el" href="namespaceEasyDelegate.html" title="Namespace containing all EasyDelegate functionality. ">EasyDelegate</a> library, though for a more complete example please refer to <a class="el" href="ex__delegateset_8cpp.html">ex_delegateset.cpp</a>. </p>
-<div class="fragment"><div class="line"><span class="keyword">class </span><a class="code" href="classMyCustomClass.html">MyCustomClass</a></div>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MyCustomClass</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">public</span>:</div>
 <div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> myMemberMethod(<span class="keywordtype">char</span> *str, <span class="keywordtype">float</span> flt, <span class="keywordtype">double</span> dbl)</div>
@@ -101,17 +101,17 @@ Example</h1>
 <div class="line">    <span class="comment">// Typedef our event type for later shortcutting</span></div>
 <div class="line">    <span class="keyword">typedef</span> <a class="code" href="classEasyDelegate_1_1DelegateSet.html">EasyDelegate::DelegateSet&lt;unsigned int, char*, float, double&gt;</a> MyEventType;</div>
 <div class="line"></div>
-<div class="line">    <span class="comment">// Instante our delegate set and the custom class type.</span></div>
+<div class="line">    <span class="comment">// Instantiate our delegate set and the custom class type.</span></div>
 <div class="line">    MyEventType myDelegateSet;</div>
-<div class="line">    <a class="code" href="classMyCustomClass.html">MyCustomClass</a> *myCustomClassInstance = <span class="keyword">new</span> <a class="code" href="classMyCustomClass.html">MyCustomClass</a>();</div>
+<div class="line">    MyCustomClass *myCustomClassInstance = <span class="keyword">new</span> MyCustomClass();</div>
 <div class="line"></div>
-<div class="line">    <span class="comment">// Instantiate our member Delegate; we obviously want it to persist even when out of scope in a production environment so we use a pointer</span></div>
+<div class="line">    <span class="comment">// Instantiate our member Delegate; we obviously want it to persist even when out of scope in a production environment so we use a pointer.</span></div>
+<div class="line">    <span class="comment">// Notice how the class type is only cared about here rather than in the DelegateSet typedef or in the push_back call below. This is because both</span></div>
+<div class="line">    <span class="comment">// StaticDelegate and MemberDelegate types may be stored in the same DelegateSet as they have the same signature, the only difference is that</span></div>
+<div class="line">    <span class="comment">// MemberDelegate types need a this pointer to call against.</span></div>
 <div class="line">    MyEventType::MemberDelegateType&lt;MyCustomClass&gt; *myMemberDelegate = <span class="keyword">new</span> MyEventType::MemberDelegateType&lt;MyCustomClass&gt;(myCustomClassInstance, &amp;MyCustomClass::myMemberMethod);</div>
 <div class="line"></div>
-<div class="line">    <span class="comment">// Register the the myMemberMethod of MyCustomClass, notice how the class type is only cared about here rather than in</span></div>
-<div class="line">    <span class="comment">// the DelegateSet typedef. This is because both StaticDelegate and MemberDelegate types may be stored in the same</span></div>
-<div class="line">    <span class="comment">// DelegateSet as they have the same signature, the only difference is that MemberDelegate types need a this pointer</span></div>
-<div class="line">    <span class="comment">// to call against.</span></div>
+<div class="line">    <span class="comment">// Register the the myMemberMethod of MyCustomClass</span></div>
 <div class="line">    myDelegateSet.push_back(myMemberDelegate);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// You can invoke the DelegateSet in the same way you invoke the delegate directly</span></div>
@@ -142,11 +142,13 @@ Links</h1>
 <ul>
 <li>
 <a href="https://github.com/Ragora">Author: Robert MacGregor</a> </li>
+<li>
+<a href="https://github.com/Ragora/EasyDelegate"></a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 23 2014 02:44:49 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 23 2014 03:16:15 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
