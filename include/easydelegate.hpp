@@ -13,6 +13,15 @@
  *  only have to worry about storing the CachedDelegate instances somewhere and invoke them with no
  *  arguments when appropriate. Said CachedDelegate types cannot be stored in a DelegateSet unless the
  *  definition fits that of the CachedDelegate::invoke() method.
+ *  @todo Mapping of various delegate for the DelegateSet type values like the this pointer, proc address
+ *  and the delegate instance pointer to helpful data that will provide non O(N) access when using methods
+ *  such as remove_delegate. This would also allow for a system in which the end programmer can quickly
+ *  grab a list of delegates that meet a certain condition such as a specific this pointer or proc address.
+ *  An std::map is going to be utilized for these implementations.
+ *  @todo Associated DelegateSet storing so that if a delegate instance is
+ *  deleted directly it can be automatically removed from any DelegateSet
+ *  instances it may be inside of. This will be done an std::vector
+ *  that will be iterated over.
  *
  *  The use of the size_t type throughout the internal implementation is designed for x86 systems
  *  where sizeof(size_t) is equivalent to sizeof(largest integer type), which has been true for GCC
@@ -240,11 +249,6 @@ namespace EasyDelegate
      *  @note Both MemberDelegate and StaticDelegate instances may be used with
      *  this.
      *  @note The contained delegate instances are deleted upon deletion.
-     *  @todo Should probably implement functionality to quickly grab a list
-     *  of delegates in the DelegateSet that have a certain proc address or
-     *  this pointer to call against. This would be done with an std::map
-     *  to map the appropriate pointer values to a list of delegates that
-     *  have the given pointer value.
      */
     template <typename returnType, typename... parameters>
     class DelegateSet

@@ -30,17 +30,17 @@
  *      // Typedef our event type for later shortcutting
  *      typedef EasyDelegate::DelegateSet<unsigned int, char*, float, double> MyEventType;
  *
- *      // Instante our delegate set and the custom class type.
+ *      // Instantiate our delegate set and the custom class type.
  *      MyEventType myDelegateSet;
  *      MyCustomClass *myCustomClassInstance = new MyCustomClass();
  *
- *      // Instantiate our member Delegate; we obviously want it to persist even when out of scope in a production environment so we use a pointer
+ *      // Instantiate our member Delegate; we obviously want it to persist even when out of scope in a production environment so we use a pointer.
+ *      // Notice how the class type is only cared about here rather than in the DelegateSet typedef or in the push_back call below. This is because both
+ *      // StaticDelegate and MemberDelegate types may be stored in the same DelegateSet as they have the same signature, the only difference is that
+ *      // MemberDelegate types need a this pointer to call against.
  *      MyEventType::MemberDelegateType<MyCustomClass> *myMemberDelegate = new MyEventType::MemberDelegateType<MyCustomClass>(myCustomClassInstance, &MyCustomClass::myMemberMethod);
  *
- *      // Register the the myMemberMethod of MyCustomClass, notice how the class type is only cared about here rather than in
- *      // the DelegateSet typedef. This is because both StaticDelegate and MemberDelegate types may be stored in the same
- *      // DelegateSet as they have the same signature, the only difference is that MemberDelegate types need a this pointer
- *      // to call against.
+ *      // Register the the myMemberMethod of MyCustomClass
  *      myDelegateSet.push_back(myMemberDelegate);
  *
  *      // You can invoke the DelegateSet in the same way you invoke the delegate directly
@@ -77,5 +77,6 @@
  *  @section Links Links
  *  <ul>
  *      <li><a href="https://github.com/Ragora">Author: Robert MacGregor</a></li>
+ *      <li><a href="https://github.com/Ragora/EasyDelegate"></a></li>
  *  </ul>
  */

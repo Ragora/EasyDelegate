@@ -56,20 +56,20 @@ int main(int argc, char *argv[])
 
     // Remove a static listener function by address
     std::cout << "-------------- REMOVING STATIC LISTENERS -----------------" << std::endl;
-    myDelegateSet.remove_listener_address(myStaticMethod);
+    myDelegateSet.remove_delegate_procaddress(myStaticMethod);
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
     // Remove a member listener function by address
     std::cout << "-------------- REMOVING MEMBER LISTENERS -----------------" << std::endl;
     myDelegateSet.push_back(new MyEventType::StaticDelegateType(myStaticMethod));
-    myDelegateSet.remove_listener_address(&MyCustomClass::myMemberMethod);
+    myDelegateSet.remove_delegate_procaddress(&MyCustomClass::myMemberMethod);
 
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
     // Remove a member listener function by this pointer
     std::cout << "-------------- REMOVING MEMBER LISTENERS VIA THIS -----------------" << std::endl;
     myDelegateSet.push_back(new MyEventType::MemberDelegateType<MyCustomClass>(myCustomClassInstance, &MyCustomClass::myMemberMethod));
-    myDelegateSet.remove_listener_this(myCustomClassInstance);
+    myDelegateSet.remove_delegate_this(myCustomClassInstance);
 
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
@@ -78,10 +78,10 @@ int main(int argc, char *argv[])
     MyEventType::MemberDelegateType<MyCustomClass> *delegateToRemove = new MyEventType::MemberDelegateType<MyCustomClass>(myCustomClassInstance, &MyCustomClass::myMemberMethod);
     myDelegateSet.push_back(delegateToRemove);
 
-    myDelegateSet.remove_listener_delegate(delegateToRemove);
+    myDelegateSet.remove_delegate(delegateToRemove, false);
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
-    // delegatToRemove Still Exists
+    // delegateToRemove Still Exists
     std::cout << "---------- Removed Delegate is still usable ------------" << std::endl;
     delegateToRemove->invoke("Foo", 3.14, 3.14159);
 
