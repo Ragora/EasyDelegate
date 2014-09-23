@@ -137,20 +137,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"></div>
 <div class="line">    <span class="comment">// Remove a static listener function by address</span></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;-------------- REMOVING STATIC LISTENERS -----------------&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">    myDelegateSet.remove_listener_address(myStaticMethod);</div>
+<div class="line">    myDelegateSet.remove_delegate_procaddress(myStaticMethod);</div>
 <div class="line">    myDelegateSet.invoke(<span class="stringliteral">&quot;Foo&quot;</span>, 3.14, 3.14159);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// Remove a member listener function by address</span></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;-------------- REMOVING MEMBER LISTENERS -----------------&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">    myDelegateSet.push_back(<span class="keyword">new</span> MyEventType::StaticDelegateType(myStaticMethod));</div>
-<div class="line">    myDelegateSet.remove_listener_address(&amp;MyCustomClass::myMemberMethod);</div>
+<div class="line">    myDelegateSet.remove_delegate_procaddress(&amp;MyCustomClass::myMemberMethod);</div>
 <div class="line"></div>
 <div class="line">    myDelegateSet.invoke(<span class="stringliteral">&quot;Foo&quot;</span>, 3.14, 3.14159);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// Remove a member listener function by this pointer</span></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;-------------- REMOVING MEMBER LISTENERS VIA THIS -----------------&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">    myDelegateSet.push_back(<span class="keyword">new</span> MyEventType::MemberDelegateType&lt;MyCustomClass&gt;(myCustomClassInstance, &amp;MyCustomClass::myMemberMethod));</div>
-<div class="line">    myDelegateSet.remove_listener_this(myCustomClassInstance);</div>
+<div class="line">    myDelegateSet.remove_delegate_this(myCustomClassInstance);</div>
 <div class="line"></div>
 <div class="line">    myDelegateSet.invoke(<span class="stringliteral">&quot;Foo&quot;</span>, 3.14, 3.14159);</div>
 <div class="line"></div>
@@ -159,10 +159,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">    MyEventType::MemberDelegateType&lt;MyCustomClass&gt; *delegateToRemove = <span class="keyword">new</span> MyEventType::MemberDelegateType&lt;MyCustomClass&gt;(myCustomClassInstance, &amp;MyCustomClass::myMemberMethod);</div>
 <div class="line">    myDelegateSet.push_back(delegateToRemove);</div>
 <div class="line"></div>
-<div class="line">    myDelegateSet.remove_listener_delegate(delegateToRemove);</div>
+<div class="line">    myDelegateSet.remove_delegate(delegateToRemove, <span class="keyword">false</span>);</div>
 <div class="line">    myDelegateSet.invoke(<span class="stringliteral">&quot;Foo&quot;</span>, 3.14, 3.14159);</div>
 <div class="line"></div>
-<div class="line">    <span class="comment">// delegatToRemove Still Exists</span></div>
+<div class="line">    <span class="comment">// delegateToRemove Still Exists</span></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;---------- Removed Delegate is still usable ------------&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">    delegateToRemove-&gt;invoke(<span class="stringliteral">&quot;Foo&quot;</span>, 3.14, 3.14159);</div>
 <div class="line"></div>
@@ -175,7 +175,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 23 2014 03:16:15 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 23 2014 03:50:08 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
