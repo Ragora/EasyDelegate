@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['mainpage_2eh',['mainpage.h',['../mainpage_8h.html',1,'']]],
   ['mdelegatevector',['mDelegateVector',['../classEasyDelegate_1_1DelegateSet.html#a535ab8813eace1e1dc202cc3218c4723',1,'EasyDelegate::DelegateSet']]],
   ['memberdelegate',['MemberDelegate',['../classEasyDelegate_1_1MemberDelegate.html',1,'EasyDelegate']]],
   ['memberdelegate',['MemberDelegate',['../classEasyDelegate_1_1MemberDelegate.html#a2c6c1343ef880bcddc5e01967622b52b',1,'EasyDelegate::MemberDelegate::MemberDelegate(classType *thisPtr, MemberDelegateFuncPtr procAddress)'],['../classEasyDelegate_1_1MemberDelegate.html#ac7fc2c1d291911cbbcaa1d28a0202928',1,'EasyDelegate::MemberDelegate::MemberDelegate(const MemberDelegate&lt; classType, returnType, parameters...&gt; &amp;other)']]],
