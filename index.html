@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Easy Delegates: Main Page</title>
+<title>Easy Delegates: Welcome</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,13 +79,76 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Easy Delegates Documentation</div>  </div>
+<div class="title">Welcome </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p><a class="el" href="namespaceEasyDelegate.html" title="Namespace containing all EasyDelegate functionality. ">EasyDelegate</a> is, as the name implies, a <a href="http://msdn.microsoft.com/en-us/library/ms173171.aspx">delegate system.</a> It is written for C++11 with the intention to allow C++ programmers to easily create references to static and member methods that may be passed around like any other variable and invoked at any point in the code. This is helpful for a variety of reasons, such as in an <a href="http://en.wikipedia.org/wiki/Sink_(computing)">event/listener implementation</a>.</p>
+<h1><a class="anchor" id="Example"></a>
+Example</h1>
+<p>This quick example below demonstrates how simple it is to utilize the <a class="el" href="namespaceEasyDelegate.html" title="Namespace containing all EasyDelegate functionality. ">EasyDelegate</a> library, though for a more complete example please refer to <a class="el" href="ex__delegateset_8cpp.html">ex_delegateset.cpp</a>. </p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MyCustomClass</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> myMemberMethod(<span class="keywordtype">char</span> *str, <span class="keywordtype">float</span> flt, <span class="keywordtype">double</span> dbl)</div>
+<div class="line">        {</div>
+<div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;MyCustomClass::myMemberMethod: &quot;</span> &lt;&lt; str &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; flt &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; dbl &lt;&lt; std::endl;</div>
+<div class="line">            <span class="keywordflow">return</span> 2;</div>
+<div class="line">        }</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// Typedef our event type for later shortcutting</span></div>
+<div class="line">    <span class="keyword">typedef</span> <a class="code" href="classEasyDelegate_1_1DelegateSet.html">EasyDelegate::DelegateSet&lt;unsigned int, char*, float, double&gt;</a> MyEventType;</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Instantiate our delegate set and the custom class type.</span></div>
+<div class="line">    MyEventType myDelegateSet;</div>
+<div class="line">    MyCustomClass *myCustomClassInstance = <span class="keyword">new</span> MyCustomClass();</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Instantiate our member Delegate; we obviously want it to persist even when out of scope in a production environment so we use a pointer.</span></div>
+<div class="line">    <span class="comment">// Notice how the class type is only cared about here rather than in the DelegateSet typedef or in the push_back call below. This is because both</span></div>
+<div class="line">    <span class="comment">// StaticDelegate and MemberDelegate types may be stored in the same DelegateSet as they have the same signature, the only difference is that</span></div>
+<div class="line">    <span class="comment">// MemberDelegate types need a this pointer to call against.</span></div>
+<div class="line">    MyEventType::MemberDelegateType&lt;MyCustomClass&gt; *myMemberDelegate = <span class="keyword">new</span> MyEventType::MemberDelegateType&lt;MyCustomClass&gt;(myCustomClassInstance, &amp;MyCustomClass::myMemberMethod);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// Register the the myMemberMethod of MyCustomClass</span></div>
+<div class="line">    myDelegateSet.push_back(myMemberDelegate);</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">// You can invoke the DelegateSet in the same way you invoke the delegate directly</span></div>
+<div class="line">    myDelegateSet.invoke(<span class="stringliteral">&quot;Foo&quot;</span>, 3.14, 3.14159);</div>
+<div class="line">    myMemberDelegate-&gt;invoke(<span class="stringliteral">&quot;Foo&quot;</span>, 3.14, 3.14159);</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">delete</span> myMemberDelegate;</div>
+<div class="line">    <span class="keyword">delete</span> myCustomClassInstance; <span class="comment">// Note that this causes any related MemberDelegate instances to become &#39;bad&#39;.</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p>The above code sample will output:</p>
+<p>"MyCustomClass::myMemberMethod: Foo,3.14,3.14159"</p>
+<p>"MyCustomClass::myMemberMethod: Foo,3.14,3.14159"</p>
+<h1><a class="anchor" id="Support"></a>
+Supported Compilers and Operating Systems</h1>
+<p><a class="el" href="namespaceEasyDelegate.html" title="Namespace containing all EasyDelegate functionality. ">EasyDelegate</a> has been compiled and known to run on the following systems: </p>
+<ul>
+<li>
+<a href="https://gcc.gnu.org/">GCC 4.8.2</a> on LUbuntu 14.04 AMD64 </li>
+<li>
+<a href="http://www.microsoft.com/en-us/download/details.aspx?id=34673">Microsoft Visual Studio 2012 Express</a> on Windows 7 x64 </li>
+</ul>
+<p>It should compile and run underneath of any compiler that supports <a href="http://en.wikipedia.org/wiki/Variadic_template">variadic templates</a> or has full C++11 support, though.</p>
+<h1><a class="anchor" id="Limits"></a>
+Limitations</h1>
+<p>Due to the nature of the library, there is one limitation which derives from the usage of templates which is the inability to work with <a href="http://en.cppreference.com/w/cpp/utility/variadic">variadic methods</a> because the ellipses ('...') involved are interpreted as a variadic template argument expansion and thusly will fail to compile. A work around for this if such functionality is necessary to your project would be to use a void* declaration instead and use that to pass a struct in which is then casted to the proper struct type on the called function's end. There may be a way to properly implement variadic method support, but I have not come up with anything yet.</p>
+<h1><a class="anchor" id="Links"></a>
+Links</h1>
+<ul>
+<li>
+<a href="https://github.com/Ragora">Author: Robert MacGregor</a> </li>
+<li>
+<a href="https://github.com/Ragora/EasyDelegate"></a> </li>
+</ul>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 23 2014 04:03:20 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 23 2014 04:06:20 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
