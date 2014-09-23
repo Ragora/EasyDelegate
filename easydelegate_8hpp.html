@@ -132,7 +132,8 @@ Namespaces</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd><a href="https://github.com/Ragora">Robert MacGregor</a></dd></dl>
 <p><a class="el" href="namespaceEasyDelegate.html" title="Namespace containing all EasyDelegate functionality. ">EasyDelegate</a> is a library that exposes an easy and flexible delegate system with the use of C++11's variatic templates. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd><p class="startdd">CachedDelegate types which can be used for deferred C++ calls which are helpful in a system where specific function calls are to be cached and executed at a later date. This is particularily helpful in a game simulation where there may be code that is executed in response to a specific event, but not immediately. This would allow for internal caching of the arguments so that the system would only have to worry about storing the CachedDelegate instances somewhere and invoke them with no arguments when appropriate. Said CachedDelegate types cannot be stored in a DelegateSet unless the definition fits that of the CachedDelegate::invoke() method. </p>
-<p class="enddd">Mapping of various delegate for the DelegateSet type values like the this pointer, proc address and the delegate instance pointer to helpful data that will provide non O(N) access when using methods such as remove_delegate. This would also allow for a system in which the end programmer can quickly grab a list of delegates that meet a certain condition such as a specific this pointer or proc address. An std::map is going to be utilized for these implementations.</p>
+<p>Mapping of various delegate for the DelegateSet type values like the this pointer, proc address and the delegate instance pointer to helpful data that will provide non O(N) access when using methods such as remove_delegate. This would also allow for a system in which the end programmer can quickly grab a list of delegates that meet a certain condition such as a specific this pointer or proc address. An std::map is going to be utilized for these implementations. </p>
+<p class="enddd">Associated DelegateSet storing so that if a delegate instance is deleted directly it can be automatically removed from any DelegateSet instances it may be inside of. This will be done an std::vector that will be iterated over.</p>
 </dd></dl>
 <p>The use of the size_t type throughout the internal implementation is designed for x86 systems where sizeof(size_t) is equivalent to sizeof(largest integer type), which has been true for GCC and MSVS on Linux and Windows systems.</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>This software is licensed under the Lesser General Public License version 3. Please refer to GPL.txt and LGPL.txt for more information. </dd></dl>
@@ -141,7 +142,7 @@ Namespaces</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 23 2014 04:06:20 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 23 2014 04:12:42 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
