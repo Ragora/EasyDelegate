@@ -1,7 +1,7 @@
 /**
  *  @file mainpage.h
- *  @version 1.0
- *  @date 9/23/2014
+ *  @version 1.1
+ *  @date 9/25/2014
  *  @author <a href="https://github.com/Ragora">Robert MacGregor</a>
  *  @brief Main page file for use with Doxygen. This file does absolutely nothing otherwise.
  *

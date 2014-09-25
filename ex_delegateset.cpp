@@ -85,8 +85,15 @@ int main(int argc, char *argv[])
     std::cout << "---------- Removed Delegate is still usable ------------" << std::endl;
     delegateToRemove->invoke("Foo", 3.14, 3.14159);
 
+    // Create a cached delegate with the removed member delegate above
+    std::cout << "---------- CACHED DELEGATES ---------------" << std::endl;
+    typedef EasyDelegate::CachedDelegate<unsigned int, char*, float, double> MyCachedDelegateType;
+
+    MyCachedDelegateType *cachedDelegate = new MyCachedDelegateType(delegateToRemove, "Cached", 3.14, 3.14159);
+    cachedDelegate->dispatch(); // Call this at any point in your application to have a deferred function call
+
     // Cleanup
-    delete delegateToRemove;
+    delete cachedDelegate; // Also deletes delegateToRemove
     delete myCustomClassInstance;
 
     return 0;

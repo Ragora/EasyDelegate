@@ -1,18 +1,11 @@
 /**
  *  @file easydelegate.hpp
- *  @version 1.0
- *  @date 9/23/2014
+ *  @version 1.1
+ *  @date 9/25/2014
  *  @author <a href="https://github.com/Ragora">Robert MacGregor</a>
  *  @brief Portable delegate system that should work on any C++11 compliant compiler.
  *  @details EasyDelegate is a library that exposes an easy and flexible delegate system with
  *  the use of C++11's variatic templates.
- *  @todo CachedDelegate types which can be used for deferred C++ calls which are helpful in a system
- *  where specific function calls are to be cached and executed at a later date. This is particularily
- *  helpful in a game simulation where there may be code that is executed in response to a specific event,
- *  but not immediately. This would allow for internal caching of the arguments so that the system would
- *  only have to worry about storing the CachedDelegate instances somewhere and invoke them with no
- *  arguments when appropriate. Said CachedDelegate types cannot be stored in a DelegateSet unless the
- *  definition fits that of the CachedDelegate::invoke() method.
  *  @todo Mapping of various delegate for the DelegateSet type values like the this pointer, proc address
  *  and the delegate instance pointer to helpful data that will provide non O(N) access when using methods
  *  such as remove_delegate. This would also allow for a system in which the end programmer can quickly
@@ -35,6 +28,7 @@
 #include <stdexcept>    // Standard exception types
 #include <assert.h>     // assert(expr)
 #include <vector>       // std::vector<type>
+#include <tuple>        // std::tuple<...>
 
 #ifndef _INCLUDE_EASYDELEGATE_HPP_
 #define _INCLUDE_EASYDELEGATE_HPP_
@@ -57,19 +51,13 @@ namespace EasyDelegate
              *  @param isMemberDelegate A boolean representing whether or not this delegate
              *  is an instance of MemberDelegate.
              */
-            GenericDelegate(const bool isMemberDelegate) : mIsMemberDelegate(isMemberDelegate) { }
-
-            /**
-             *  @brief Returns whether or not this delegate calls against the given this pointer.
-             *  @param thisPointer A pointer referring to the object of interest.
-             *  @return A boolean representing whether or not this delegate calls a member function
-             *  against the given this pointer.
-             *  @note Always returns false for StaticDelegate types because they do not use a this pointer.
-             */
-            virtual bool has_thispointer(void *thisPointer) = 0;
+            GenericDelegate(const bool &isMemberDelegate, const bool &isCachedDelegate) : mIsMemberDelegate(isMemberDelegate),
+            mIsCachedDelegate(isCachedDelegate) { }
 
             //! A boolean representing whether or not this delegate is a member delegate.
             const bool mIsMemberDelegate;
+            //! A boolean representing whether or not this delegate is a cached delegate.
+            const bool mIsCachedDelegate;
     };
 
     /**
@@ -512,6 +500,124 @@ namespace EasyDelegate
             std::vector<DelegateSet::DelegateBaseType *> mDelegateVector;
     };
 
+
+    // Taken from the chosen answer of
+    // http://stackoverflow.com/questions/7858817/unpacking-a-tuple-to-call-a-matching-function-pointer
+    template<int ...> struct seq {};
+    template<int N, int ...S> struct gens : gens<N-1, N-1, S...> {};
+    template<int ...S> struct gens<0, S...>{ typedef seq<S...> type; };
+
+    /**
+     *  @brief A type whose purpose is to provide deferred calling capabilities, as the name applies.
+     */
+    class GenericCachedDelegate : public GenericDelegate
+    {
+        public:
+            /**
+             *  @brief Constructor accepting a GenericDelegate pointer.
+             *  @param delegate A pointer to the GenericDelegate to be stored on the CachedDelegate.
+             */
+            GenericCachedDelegate(GenericDelegate *delegate) : GenericDelegate(delegate->mIsMemberDelegate, true)
+            {
+
+            }
+
+            /**
+             *  @brief Dispatches the GenericCachedDelegate, ignoring the return value.
+             *  @details This behaves exactly as the dispatch method available on CachedDelegate
+             *  types except it does not care about the return value of the invoked delegate. You
+             *  have to cast to a CachedDelegate with the proper function signature in order to
+             *  dispatch it and get a return value.
+             */
+            virtual void generic_dispatch(void) = 0;
+    };
+
+    /**
+     *  @brief A delegate type with which you can perform deferred calls.
+     *  @details This is essentially just a wrapper for either a StaticDelegate or MemberDelegate
+     *  instance but it caches any arguments for later invocation.
+     */
+    template <typename returnType, typename... parameters>
+    class CachedDelegate : public GenericCachedDelegate
+    {
+        // Public Methods
+        public:
+            /**
+             *  @brief Constructor accepting a delegate instance and function call parameters.
+             *  @param delegate A pointer to the delegate instance that this CachedDelegate is supposed to invoke.
+             *  @param params Anything; these parameters depend on the function signature defined in the template.
+             */
+            CachedDelegate(DelegateBase<returnType, parameters...> *delegate, parameters... params) : GenericCachedDelegate(delegate),
+            mDelegate(delegate),
+            mParameters(params...)
+            {
+
+            }
+
+            /**
+             *  @brief Standard destructor.
+             *  @note This deletes the stored delegate instance as well, so the deletion of
+             *  any CachedDelegate types will invalidate the delegate it was calling.
+             */
+            ~CachedDelegate(void) { delete mDelegate; mDelegate = NULL; }
+
+            /**
+             *  @brief Dispatches the CachedDelegate.
+             *  @details This is equivalent to the invoke() method on all other delegate
+             *  types except the parameters were cached at creation. Said cached parameters
+             *  will be passed in automatically upon calling this, so it is completely safe
+             *  to store.
+             *  @return Anything; it depends on the function signature defined in the template.
+             */
+            returnType dispatch(void)
+            {
+                return performCachedCall(typename gens<sizeof...(parameters)>::type());
+            }
+
+            /**
+             *  @brief Dispatches the CachedDelegate, ignoring the return value.
+             *  @details This behaves exactly as the dispatch method above except it does not
+             *  care about the return of the called function. This method is also callable on
+             *  the CachedDelegateBase type, unlike the normal dispatch method.
+             */
+            void generic_dispatch(void) { dispatch(); }
+
+            /**
+             *  @brief Gets the internally invoked delegate.
+             *  @return A pointer to the internally invoked delegate.
+             */
+            const DelegateBase<returnType, parameters...> *get_delegate(void) { return mDelegate; }
+
+        // Private Methods
+        private:
+            //! Internal templated method to invoke the stored delegate instance.
+            template<int ...S>
+            returnType performCachedCall(seq<S...>)
+            {
+                assert(mDelegate);
+
+                if (!mDelegate)
+                    throw std::runtime_error("Bad CachedDelegate mDelegate pointer!");
+
+                return mDelegate->invoke(std::get<S>(mParameters) ...);
+            }
+
+        // Public Members
+        public:
+            //! Helper typedef to a StaticDelegate.
+            typedef StaticDelegate<returnType, parameters...> StaticDelegateType;
+            template <typename classType>
+            //! Helper typedef to a MemberDelegate.
+            using MemberDelegateType = MemberDelegate<classType, returnType, parameters...>;
+
+        // Private Members
+        private:
+            //! Internal std::tuple that is utilized to cache the parameter list.
+            const std::tuple<parameters...> mParameters;
+            //! Pointer to the internally invoked delegate instance.
+            DelegateBase<returnType, parameters...> *mDelegate;
+    };
+
     /**
      *  @brief Base delegate type.
      *  @details Inheritance from this type allows for both the StaticDelegate
@@ -541,7 +647,7 @@ namespace EasyDelegate
              *  @param isMemberDelegate A boolean representing whether or not this delegate is a
              *  member delegate.
              */
-            DelegateBase(const bool &isMemberDelegate) : GenericDelegate(isMemberDelegate) { }
+            DelegateBase(const bool &isMemberDelegate) : GenericDelegate(isMemberDelegate, false) { }
 
             /**
              *  @brief Returns whether or not this delegate calls the given static proc address.
@@ -572,6 +678,16 @@ namespace EasyDelegate
                 MemberDelegate<className, returnType, parameters...> *memberDelegateObj = (MemberDelegate<className, returnType, parameters...>*)this;
                 return memberDelegateObj->has_procaddress(procAddress);
             }
+
+
+            /**
+             *  @brief Returns whether or not this delegate calls against the given this pointer.
+             *  @param thisPointer A pointer referring to the object of interest.
+             *  @return A boolean representing whether or not this delegate calls a member function
+             *  against the given this pointer.
+             *  @note Always returns false for StaticDelegate types because they do not use a this pointer.
+             */
+            virtual bool has_thispointer(void *thisPointer) = 0;
 
             /**
              *  @brief Invoke the delegate with the given arguments and return a value, if any.
