@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['has_5fprocaddress',['has_procaddress',['../classEasyDelegate_1_1StaticDelegate.html#af259208cc37d7660af8c522ee6ae763b',1,'EasyDelegate::StaticDelegate::has_procaddress()'],['../classEasyDelegate_1_1MemberDelegate.html#ae1ec2429a5a957c16f5f36d442e7b846',1,'EasyDelegate::MemberDelegate::has_procaddress(MemberDelegate::MemberDelegateFuncPtr procAddress)'],['../classEasyDelegate_1_1MemberDelegate.html#a1780b5c7a66f287cdf2c8ba9ddce7ec7',1,'EasyDelegate::MemberDelegate::has_procaddress(MemberDelegate::StaticDelegateFuncPtr funcPtr)']]],
-  ['has_5fthispointer',['has_thispointer',['../classEasyDelegate_1_1GenericDelegate.html#a265dabcbe8aa3a5895369dea76592c53',1,'EasyDelegate::GenericDelegate::has_thispointer()'],['../classEasyDelegate_1_1StaticDelegate.html#a429c794e4b7af666808b9baf8ce42c83',1,'EasyDelegate::StaticDelegate::has_thispointer()'],['../classEasyDelegate_1_1MemberDelegate.html#ac79fe3db1b495e8e6c778dab3d59faff',1,'EasyDelegate::MemberDelegate::has_thispointer()']]]
+  ['generic_5fdispatch',['generic_dispatch',['../classEasyDelegate_1_1GenericCachedDelegate.html#a0a1ca63dcb6d2e845c3952a57d5fa8fd',1,'EasyDelegate::GenericCachedDelegate::generic_dispatch()'],['../classEasyDelegate_1_1CachedDelegate.html#a2db7dc12b4851a429820fdfb567e73ac',1,'EasyDelegate::CachedDelegate::generic_dispatch()']]],
+  ['genericcacheddelegate',['GenericCachedDelegate',['../classEasyDelegate_1_1GenericCachedDelegate.html#a95ea8b2c30988040ee069f2c5e37749a',1,'EasyDelegate::GenericCachedDelegate']]],
+  ['genericdelegate',['GenericDelegate',['../classEasyDelegate_1_1GenericDelegate.html#a6a956f131ab3d61813095c1802dc1a54',1,'EasyDelegate::GenericDelegate']]],
+  ['get_5fdelegate',['get_delegate',['../classEasyDelegate_1_1CachedDelegate.html#a856ee6ca55d74b7ed5a9e4cd268aeb7a',1,'EasyDelegate::CachedDelegate']]]
 ];

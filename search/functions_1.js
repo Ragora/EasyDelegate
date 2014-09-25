@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['delegateset',['DelegateSet',['../classEasyDelegate_1_1DelegateSet.html#a03ac30ca2a107eb556c55c49ef3aac89',1,'EasyDelegate::DelegateSet']]]
+  ['cacheddelegate',['CachedDelegate',['../classEasyDelegate_1_1CachedDelegate.html#ab52cfca2bc30542cd102a9eff0a2684d',1,'EasyDelegate::CachedDelegate']]]
 ];

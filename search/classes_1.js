@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['genericdelegate',['GenericDelegate',['../classEasyDelegate_1_1GenericDelegate.html',1,'EasyDelegate']]]
+  ['delegateset',['DelegateSet',['../classEasyDelegate_1_1DelegateSet.html',1,'EasyDelegate']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['operator_2b_3d',['operator+=',['../classEasyDelegate_1_1DelegateSet.html#adc0242cd4f91b33fe738a190e77fc6ea',1,'EasyDelegate::DelegateSet']]],
-  ['operator_5b_5d',['operator[]',['../classEasyDelegate_1_1DelegateSet.html#a5b01a32cddfae0d059b80653a326ddd7',1,'EasyDelegate::DelegateSet']]]
+  ['memberdelegate',['MemberDelegate',['../classEasyDelegate_1_1MemberDelegate.html#a2c6c1343ef880bcddc5e01967622b52b',1,'EasyDelegate::MemberDelegate::MemberDelegate(classType *thisPtr, MemberDelegateFuncPtr procAddress)'],['../classEasyDelegate_1_1MemberDelegate.html#ac7fc2c1d291911cbbcaa1d28a0202928',1,'EasyDelegate::MemberDelegate::MemberDelegate(const MemberDelegate&lt; classType, returnType, parameters...&gt; &amp;other)']]]
 ];

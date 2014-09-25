@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['genericdelegate',['GenericDelegate',['../classEasyDelegate_1_1GenericDelegate.html#a9045fb5a85a3b62771e7a8801886d6f9',1,'EasyDelegate::GenericDelegate']]]
+  ['empty',['empty',['../classEasyDelegate_1_1DelegateSet.html#a4df2c37b63ce7c7b81b41688cb7d9e60',1,'EasyDelegate::DelegateSet']]],
+  ['end',['end',['../classEasyDelegate_1_1DelegateSet.html#ac161dc968727ccd9b8e0aed41bb27299',1,'EasyDelegate::DelegateSet']]],
+  ['erase',['erase',['../classEasyDelegate_1_1DelegateSet.html#a90cfe2c9dcfc25930cbc0c73e9293a2e',1,'EasyDelegate::DelegateSet']]]
 ];

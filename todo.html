@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Easy Delegates
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">Easy to use delegate system for C++11.</div>
   </td>
@@ -84,15 +84,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt><a class="anchor" id="_todo000001"></a>File <a class="el" href="easydelegate_8hpp.html">easydelegate.hpp</a>  </dt>
-<dd><p class="startdd">CachedDelegate types which can be used for deferred C++ calls which are helpful in a system where specific function calls are to be cached and executed at a later date. This is particularily helpful in a game simulation where there may be code that is executed in response to a specific event, but not immediately. This would allow for internal caching of the arguments so that the system would only have to worry about storing the CachedDelegate instances somewhere and invoke them with no arguments when appropriate. Said CachedDelegate types cannot be stored in a DelegateSet unless the definition fits that of the CachedDelegate::invoke() method. </p>
-<p>Mapping of various delegate for the DelegateSet type values like the this pointer, proc address and the delegate instance pointer to helpful data that will provide non O(N) access when using methods such as remove_delegate. This would also allow for a system in which the end programmer can quickly grab a list of delegates that meet a certain condition such as a specific this pointer or proc address. An std::map is going to be utilized for these implementations. </p>
+<dd><p class="startdd">Mapping of various delegate for the DelegateSet type values like the this pointer, proc address and the delegate instance pointer to helpful data that will provide non O(N) access when using methods such as remove_delegate. This would also allow for a system in which the end programmer can quickly grab a list of delegates that meet a certain condition such as a specific this pointer or proc address. An std::map is going to be utilized for these implementations. </p>
 <p class="enddd">Associated DelegateSet storing so that if a delegate instance is deleted directly it can be automatically removed from any DelegateSet instances it may be inside of. This will be done an std::vector that will be iterated over.</p>
 </dd>
 </dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 23 2014 04:12:42 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 17:56:00 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

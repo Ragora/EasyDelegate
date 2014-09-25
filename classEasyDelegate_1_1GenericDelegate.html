@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Easy Delegates
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">Easy to use delegate system for C++11.</div>
   </td>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classEasyDelegate_1_1GenericDelegate-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">EasyDelegate::GenericDelegate Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">EasyDelegate::GenericDelegate Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -109,19 +109,18 @@ Inheritance diagram for EasyDelegate::GenericDelegate:</div>
  <div class="center">
   <img src="classEasyDelegate_1_1GenericDelegate.png" usemap="#EasyDelegate::GenericDelegate_map" alt=""/>
   <map id="EasyDelegate::GenericDelegate_map" name="EasyDelegate::GenericDelegate_map">
+<area href="classEasyDelegate_1_1GenericCachedDelegate.html" title="A type whose purpose is to provide deferred calling capabilities, as the name applies. " alt="EasyDelegate::GenericCachedDelegate" shape="rect" coords="852,56,1268,80"/>
 <area href="classEasyDelegate_1_1MemberDelegate.html" title="A delegate of a class member function. " alt="EasyDelegate::MemberDelegate&lt; classType, returnType, parameters &gt;" shape="rect" coords="0,112,416,136"/>
 <area href="classEasyDelegate_1_1StaticDelegate.html" title="A delegate of a static function. " alt="EasyDelegate::StaticDelegate&lt; returnType, parameters &gt;" shape="rect" coords="426,112,842,136"/>
+<area href="classEasyDelegate_1_1CachedDelegate.html" title="A delegate type with which you can perform deferred calls. " alt="EasyDelegate::CachedDelegate&lt; returnType, parameters &gt;" shape="rect" coords="852,112,1268,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9045fb5a85a3b62771e7a8801886d6f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEasyDelegate_1_1GenericDelegate.html#a9045fb5a85a3b62771e7a8801886d6f9">GenericDelegate</a> (const bool isMemberDelegate)</td></tr>
-<tr class="memdesc:a9045fb5a85a3b62771e7a8801886d6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor accepting a boolean.  <a href="#a9045fb5a85a3b62771e7a8801886d6f9">More...</a><br/></td></tr>
-<tr class="separator:a9045fb5a85a3b62771e7a8801886d6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a265dabcbe8aa3a5895369dea76592c53"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEasyDelegate_1_1GenericDelegate.html#a265dabcbe8aa3a5895369dea76592c53">has_thispointer</a> (void *thisPointer)=0</td></tr>
-<tr class="memdesc:a265dabcbe8aa3a5895369dea76592c53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether or not this delegate calls against the given this pointer.  <a href="#a265dabcbe8aa3a5895369dea76592c53">More...</a><br/></td></tr>
-<tr class="separator:a265dabcbe8aa3a5895369dea76592c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a956f131ab3d61813095c1802dc1a54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEasyDelegate_1_1GenericDelegate.html#a6a956f131ab3d61813095c1802dc1a54">GenericDelegate</a> (const bool &amp;isMemberDelegate, const bool &amp;isCachedDelegate)</td></tr>
+<tr class="memdesc:a6a956f131ab3d61813095c1802dc1a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor accepting a boolean.  <a href="#a6a956f131ab3d61813095c1802dc1a54">More...</a><br/></td></tr>
+<tr class="separator:a6a956f131ab3d61813095c1802dc1a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -129,14 +128,18 @@ Public Attributes</h2></td></tr>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEasyDelegate_1_1GenericDelegate.html#a53c80b780e9df92da58075af6f97710d">mIsMemberDelegate</a></td></tr>
 <tr class="memdesc:a53c80b780e9df92da58075af6f97710d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A boolean representing whether or not this delegate is a member delegate. <br/></td></tr>
 <tr class="separator:a53c80b780e9df92da58075af6f97710d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b27cafbb573cfd5349dcfa0993066aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b27cafbb573cfd5349dcfa0993066aa"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEasyDelegate_1_1GenericDelegate.html#a4b27cafbb573cfd5349dcfa0993066aa">mIsCachedDelegate</a></td></tr>
+<tr class="memdesc:a4b27cafbb573cfd5349dcfa0993066aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">A boolean representing whether or not this delegate is a cached delegate. <br/></td></tr>
+<tr class="separator:a4b27cafbb573cfd5349dcfa0993066aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A type that can represent any delegate type, but it cannot be invoked without casting to a delegate type that knows the proper function signature. </p>
 <p>This delegate type is useful in the event you wish to pass around delegates regardless of the type in a system where the function signature is resolved via other means for type casting and invocation. </p>
 
-<p>Definition at line <a class="el" href="easydelegate_8hpp_source.html#l00052">52</a> of file <a class="el" href="easydelegate_8hpp_source.html">easydelegate.hpp</a>.</p>
+<p>Definition at line <a class="el" href="easydelegate_8hpp_source.html#l00046">46</a> of file <a class="el" href="easydelegate_8hpp_source.html">easydelegate.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9045fb5a85a3b62771e7a8801886d6f9"></a>
+<a class="anchor" id="a6a956f131ab3d61813095c1802dc1a54"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -146,9 +149,19 @@ const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
         <tr>
           <td class="memname">EasyDelegate::GenericDelegate::GenericDelegate </td>
           <td>(</td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>isMemberDelegate</em></td><td>)</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>isMemberDelegate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>isCachedDelegate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -166,44 +179,7 @@ const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="easydelegate_8hpp_source.html#l00060">60</a> of file <a class="el" href="easydelegate_8hpp_source.html">easydelegate.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a265dabcbe8aa3a5895369dea76592c53"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool EasyDelegate::GenericDelegate::has_thispointer </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>thisPointer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns whether or not this delegate calls against the given this pointer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">thisPointer</td><td>A pointer referring to the object of interest. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A boolean representing whether or not this delegate calls a member function against the given this pointer. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Always returns false for <a class="el" href="classEasyDelegate_1_1StaticDelegate.html" title="A delegate of a static function. ">StaticDelegate</a> types because they do not use a this pointer. </dd></dl>
-
-<p>Implemented in <a class="el" href="classEasyDelegate_1_1MemberDelegate.html#ac79fe3db1b495e8e6c778dab3d59faff">EasyDelegate::MemberDelegate&lt; classType, returnType, parameters &gt;</a>, and <a class="el" href="classEasyDelegate_1_1StaticDelegate.html#a429c794e4b7af666808b9baf8ce42c83">EasyDelegate::StaticDelegate&lt; returnType, parameters &gt;</a>.</p>
+<p>Definition at line <a class="el" href="easydelegate_8hpp_source.html#l00054">54</a> of file <a class="el" href="easydelegate_8hpp_source.html">easydelegate.hpp</a>.</p>
 
 </div>
 </div>
@@ -213,7 +189,7 @@ const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 23 2014 04:12:42 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 17:56:00 for Easy Delegates by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
