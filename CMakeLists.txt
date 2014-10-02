@@ -1,7 +1,7 @@
 # CMakeLists.txt
 # Used for building the example code on any CMake supported system.
-# This software is licensed under the Lesser General Public License version 3.
-# Please refer to GPL.txt and LGPL.txt for more information.
+# This software is licensed under the MIT license. Please refer to
+# LICENSE.txt for more information.
 
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 PROJECT (EasyDelegate)
