@@ -2,7 +2,7 @@
  *  @file mainpage.h
  *  @version 1.2
  *  @date 10/2/2014
- *  @author <a href="https://github.com/Ragora">Robert MacGregor</a>
+ *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *  @brief Main page file for use with Doxygen. This file does absolutely nothing otherwise.
  *
  *  @mainpage Welcome
@@ -76,7 +76,7 @@
  *
  *  @section Links Links
  *  <ul>
- *      <li><a href="https://github.com/Ragora">Author: Robert MacGregor</a></li>
+ *      <li><a href="http://dx.no-ip.org">Author: Robert MacGregor</a></li>
  *      <li><a href="https://github.com/Ragora/EasyDelegate">EasyDelegate on GitHub</a></li>
  *  </ul>
  */
