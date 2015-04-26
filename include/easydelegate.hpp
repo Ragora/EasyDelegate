@@ -1,28 +1,15 @@
 /**
  *  @file easydelegate.hpp
  *  @version 2.0
- *  @date 4/25/2015
- *  @author <a href="https://github.com/Ragora">Robert MacGregor</a>
+ *  @date 4/26/2015
+ *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *  @brief Portable delegate system that should work on any C++11 compliant compiler.
  *  @details EasyDelegate is a library that exposes an easy and flexible delegate system with
  *  the use of C++11's variatic templates.
- *  @todo Mapping of various delegate for the DelegateSet type values like the this pointer, proc address
- *  and the delegate instance pointer to helpful data that will provide non O(N) access when using methods
- *  such as remove_delegate. This would also allow for a system in which the end programmer can quickly
- *  grab a list of delegates that meet a certain condition such as a specific this pointer or proc address.
- *  An std::map is going to be utilized for these implementations.
- *  @todo Associated DelegateSet storing so that if a delegate instance is
- *  deleted directly it can be automatically removed from any DelegateSet
- *  instances it may be inside of. This will be done an std::vector
- *  that will be iterated over.
  *
- *  The use of the size_t type throughout the internal implementation is designed for x86 systems
- *  where sizeof(size_t) is equivalent to sizeof(largest integer type), which has been true for GCC
- *  and MSVS on Linux and Windows systems.
- *
- *  @copyright This software is licensed under the MIT license. Please refer to LICENSE.txt for more
+ *  @example example.cpp
+ *  @copyright This software is licensed under the MIT license. Refer to LICENSE.txt for more
  *	information.
- *  @example ex_delegateset.cpp
  */
 
 #ifndef _INCLUDE_EASYDELEGATE_HPP_
@@ -34,7 +21,6 @@
 
 #include <set>              // std::set<type>
 #include <tuple>            // std::tuple<...>
-#include <unordered_map>    // std::unordered_map<key, type>
 #include <unordered_set>    // std::unordered_set<type>
 
 // Define __forceinline if we're on GCC
@@ -53,6 +39,17 @@
 namespace EasyDelegate
 {
     using namespace std;
+
+    // Taken from the chosen answer of
+    // http://stackoverflow.com/questions/7858817/unpacking-a-tuple-to-call-a-matching-function-pointer
+    template<int ...> struct seq {};
+    template<int N, int ...S> struct gens : gens<N-1, N-1, S...> {};
+    template<int ...S> struct gens<0, S...>{ typedef seq<S...> type; };
+
+    // Taken from the chosen answer of
+    // http://stackoverflow.com/questions/12742877/remove-reference-from-stdtuple-members
+    template <typename... typenames>
+    using NoReferenceTuple = tuple<typename remove_reference<typenames>::type...>;
 
     /**
      *  @brief A general base exception type for all exceptions that is thrown
@@ -96,6 +93,9 @@ namespace EasyDelegate
      *  @details This delegate type is useful in the event you wish to pass
      *  around delegates regardless of the type in a system where the function
      *  signature is resolved via other means for type casting and invocation.
+     *
+     *  This class type has two booleans readily available that can be used to help
+     *  distinguish the actual type at runtime: mIsMemberDelegate and mIsCachedDelegate.
      */
     class GenericDelegate
     {
@@ -127,6 +127,12 @@ namespace EasyDelegate
     template <typename returnType, typename... parameters>
     class DelegateBase;
 
+    template <typename classType, typename returnType, typename... parameters>
+    class MemberDelegate;
+
+    template <typename returnType, typename... parameters>
+    class CachedStaticDelegate;
+
     /**
      *  @brief A delegate of a static function.
      *  @details The function that is to be made into a delegate ae template.
@@ -146,7 +152,7 @@ namespace EasyDelegate
              *  @param procAddress The static function that this delegate
              *  is intended to invoke.
              */
-            StaticDelegate(StaticDelegateFuncPtr procAddress) : DelegateBase<returnType, parameters...>(false), mProcAddress(procAddress) { }
+            StaticDelegate(const StaticDelegateFuncPtr procAddress) : DelegateBase<returnType, parameters...>(false), mProcAddress(procAddress) { }
 
             /**
              *  @brief Standard copy constructor.
@@ -192,15 +198,24 @@ namespace EasyDelegate
              */
             const bool has_procaddress(const StaticDelegate::StaticDelegateFuncPtr procAddress) const noexcept { return mProcAddress == procAddress; };
 
+            // Comparison against a member delegate type
+            bool operator ==(const StaticDelegate<returnType, parameters...> &other) const noexcept { return other.mProcAddress == mProcAddress; }
+
+            template <typename otherClass, typename otherReturn, typename... otherParams>
+            bool operator ==(const MemberDelegate<otherClass, otherReturn, otherParams...> &other) const noexcept { return false;  }
+
+            template <typename otherReturn, typename... otherParams>
+            bool operator ==(const StaticDelegate<otherReturn, otherParams...> &other) const noexcept { return false; }
+
         private:
             //! Internal pointer to proc address to be called.
-            StaticDelegateFuncPtr mProcAddress;
+            const StaticDelegateFuncPtr mProcAddress;
     };
 
     /**
-     *  @brief A delegate of a class member function.
-     *  @details The function that is to be made into a delegate must have
-     *  the class type and it's return type and argument information specified in the template.
+     *  @brief A delegate of a class member method.
+     *  @details The method that is to be made into a delegate must have
+     *  the class type, return type and argument information specified in the template.
      */
     template <typename classType, typename returnType, typename... parameters>
     class MemberDelegate : public DelegateBase<returnType, parameters...>
@@ -221,7 +236,7 @@ namespace EasyDelegate
              *  pointer at any time has been deallocated. The MemberDelegate will cause undefined
              *  behavior and/or segfault upon invocation in that case.
              */
-            MemberDelegate(classType *thisPtr, MemberDelegateFuncPtr procAddress) : mThisPtr(thisPtr),
+            MemberDelegate(const classType *thisPtr, const MemberDelegateFuncPtr procAddress) : mThisPtr(thisPtr),
             mProcAddress(procAddress), DelegateBase<returnType, parameters...>(true) { }
 
             /**
@@ -281,6 +296,15 @@ namespace EasyDelegate
              */
             const bool has_procaddress(const MemberDelegate::StaticDelegateFuncPtr funcPtr) const noexcept { return false; }
 
+            // Comparison against a member delegate type
+            bool operator ==(const MemberDelegate<classType, returnType, parameters...> &other) const noexcept { return other.mProcAddress == mProcAddress; }
+
+            template <typename otherClass, typename otherReturn, typename... otherParams>
+            bool operator ==(const MemberDelegate<otherClass, otherReturn, otherParams...> &other) const noexcept { return false;  }
+
+            template <typename otherReturn, typename... otherParams>
+            bool operator ==(const StaticDelegate<otherReturn, otherParams...> &other) const noexcept { return false; }
+
         private:
             //! An internal pointer to this object.
             const classType *mThisPtr;
@@ -288,12 +312,22 @@ namespace EasyDelegate
             const MemberDelegateFuncPtr mProcAddress;
     };
 
+    /**
+     *  @brief A set of delegate instances that provides helper methods to invoke all
+     *  contained delegates.
+     *  @details The DelegateSet type can be described as a sink for specific event types.
+     *  Typical usage of this behavior would involve creating a typedef of a DelegateSet type
+     *  for a specific method signature which then has its own specialized typedefs to facilitate
+     *  the creation of StaticDelegate and MemberDelegate types that are compatible with instances
+     *  of this new specialized DelegateSet type.
+     *  @example ex_events.cpp
+     */
     template <typename returnType, typename... parameters>
     class DelegateSet : public set<DelegateBase<returnType, parameters...> *>
     {
         public:
             //! Helper typedef to construct the function pointer signature from the template.
-            typedef returnType(*delegateFuncPtr)(parameters...);
+            typedef returnType (*delegateFuncPtr)(parameters...);
 
         public:
             //! Helper typedef for when building static delegates for this set.
@@ -421,7 +455,7 @@ namespace EasyDelegate
              *  @warning If deleteInstances is false and there is no out specified, you will be leaking memory if there is no other
              *  delegate tracking mechanism implemented by your project.
              */
-            void remove_delegate_this(void *thisPtr, const bool &deleteInstances=true, unordered_set<DelegateSet::DelegateBaseType *>* out=NULL)
+            void remove_delegate_this(const void *thisPtr, const bool &deleteInstances=true, unordered_set<DelegateSet::DelegateBaseType *>* out=NULL)
             {
                 for (typename set<DelegateSet::DelegateBaseType *>::iterator it = this->begin(); it != this->end(); it++)
                 {
@@ -466,17 +500,6 @@ namespace EasyDelegate
                 return NULL;
             }
     };
-
-    // Taken from the chosen answer of
-    // http://stackoverflow.com/questions/7858817/unpacking-a-tuple-to-call-a-matching-function-pointer
-    template<int ...> struct seq {};
-    template<int N, int ...S> struct gens : gens<N-1, N-1, S...> {};
-    template<int ...S> struct gens<0, S...>{ typedef seq<S...> type; };
-
-    // Taken from the chosen answer of
-    // http://stackoverflow.com/questions/12742877/remove-reference-from-stdtuple-members
-    template <typename... typenames>
-    using NoReferenceTuple = tuple<typename remove_reference<typenames>::type...>;
 
     /**
      *  @brief Base delegate type.
@@ -540,7 +563,6 @@ namespace EasyDelegate
                 return memberDelegateObj->has_procaddress(procAddress);
             }
 
-
             /**
              *  @brief Returns whether or not this delegate calls against the given this pointer.
              *  @param thisPointer A pointer referring to the object of interest.
@@ -554,19 +576,15 @@ namespace EasyDelegate
              *  @brief Invoke the delegate with the given arguments and return a value, if any.
              *  @param params Anything; It depends on the function signature specified in the template.
              *  @return Anything; It depends on the function signature specified in the template.
-             *  @throw std::runtime_error Thrown when assertions are disabled and either a MemberDelegate
+             *  @throw InvalidMethodPointerException Thrown when assertions are disabled and either a MemberDelegate
              *  or StaticDelegate type have a NULL function to call.
-             *  @throw std::runtime_error Thrown when assertions are disabled and this is a MemberDelegate
+             *  @throw InvalidThisPointerException Thrown when assertions are disabled and this is a MemberDelegate
              *  attempting to call against a NULL this pointer.
              *  @throw std::exception Any exception can be potentially thrown by the function to be called.
              *  @note The call will not throw an exception in any of the std::runtime_error cases but rather
              *  assert if assertions are enabled.
              */
             virtual returnType invoke(parameters... params) = 0;
-
-            // Public Members
-            public:
-             //   unordered_set<EasyDelegate::DelegateSet<returnType, parameters...>::DelegateBaseType<returnType, parameters...> *> mDelegateSets;
 
     };
 
@@ -626,8 +644,8 @@ namespace EasyDelegate
              *  pointer at any time has been deallocated. The MemberDelegate will cause undefined
              *  behavior and/or segfault upon invocation in that case.
              */
-            CachedMemberDelegate(MemberDelegateFuncPtr procAddress, classType *thisPtr, parameters... params) :
-            mThisPtr(thisPtr), mParameters(params...),mProcAddress(procAddress)
+            CachedMemberDelegate(const MemberDelegateFuncPtr procAddress, classType *thisPtr, parameters... params) :
+            mThisPtr(thisPtr), mParameters(params...), mProcAddress(procAddress)
             {
 
             }
@@ -662,7 +680,7 @@ namespace EasyDelegate
              *  @note Always returns false for StaticDelegate types because a StaticDelegate cannot
              *  call member functions.
              */
-            const bool has_procaddress(const MemberDelegateFuncPtr funcPtr) const noexcept { return false; }
+            const bool has_procaddress(const MemberDelegateFuncPtr funcPtr) const noexcept { return funcPtr == mProcAddress; }
 
             /**
              *  @brief Returns whether or not this delegate calls against the given this pointer.
@@ -671,7 +689,15 @@ namespace EasyDelegate
              *  against the given this pointer.
              *  @note Always returns false for StaticDelegate types because they do not use a this pointer.
              */
-            virtual const bool has_thispointer(const void *thisPointer) const noexcept { return true; }
+            virtual const bool has_thispointer(const void *thisPointer) const noexcept { return thisPointer == mThisPtr; }
+
+            bool operator ==(const CachedMemberDelegate<classType, returnType, parameters...> &other) const noexcept { return other.mProcAddress == mProcAddress; }
+
+            template <typename otherClass, typename otherReturn, typename... otherParams>
+            bool operator ==(const CachedMemberDelegate<otherClass, otherReturn, otherParams...> &other) const noexcept { return false;  }
+
+            template <typename otherReturn, typename... otherParams>
+            bool operator ==(const CachedStaticDelegate<otherReturn, otherParams...> &other) const noexcept { return false; }
 
         // Private Methods
         private:
@@ -687,8 +713,13 @@ namespace EasyDelegate
                 return (mThisPtr->*mProcAddress)(get<S>(mParameters) ...);
             }
 
+        // Public Members
+        public:
             //! An internal pointer to this object.
             classType *mThisPtr;
+
+        // Private Members
+        private:
             //! An internal pointer to the proc address to be called.
             const MemberDelegateFuncPtr mProcAddress;
 
@@ -717,9 +748,8 @@ namespace EasyDelegate
              *  pointer at any time has been deallocated. The MemberDelegate will cause undefined
              *  behavior and/or segfault upon invocation in that case.
              */
-            CachedStaticDelegate(StaticDelegateFuncPtr procAddress, parameters... params) :
-            mParameters(params...),
-            mProcAddress(procAddress) { }
+            CachedStaticDelegate(const StaticDelegateFuncPtr procAddress, parameters... params) :
+            mParameters(params...), mProcAddress(procAddress) { }
 
             /**
              *  @brief Dispatches the CachedDelegate.
@@ -762,6 +792,14 @@ namespace EasyDelegate
              *  @note Always returns false for StaticDelegate types because they do not use a this pointer.
              */
             virtual const bool has_thispointer(const void *thisPointer) const noexcept { return true; }
+
+            bool operator ==(const CachedStaticDelegate<returnType, parameters...> &other) const noexcept { return other.mProcAddress == mProcAddress; }
+
+            template <typename otherClass, typename otherReturn, typename... otherParams>
+            bool operator ==(const CachedMemberDelegate<otherClass, otherReturn, otherParams...> &other) const noexcept { return false;  }
+
+            template <typename otherReturn, typename... otherParams>
+            bool operator ==(const CachedStaticDelegate<otherReturn, otherParams...> &other) const noexcept { return false; }
 
         // Private Methods
         private:

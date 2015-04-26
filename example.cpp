@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 {
     // You can typedef the actual delegate type to some type that's specific to your project
     typedef EasyDelegate::DelegateSet<unsigned int, const char *, const float &, const double &> MyEventType;
+    typedef EasyDelegate::DelegateSet<void, const float &, const char *, const double &> VoidEventType;
 
     MyEventType myDelegateSet;
     MyCustomClass *myCustomClassInstance = new MyCustomClass();
@@ -120,6 +121,20 @@ int main(int argc, char *argv[])
         cout << "Invoking Delegate " << endl;
         (*it)->generic_dispatch();
     }
+
+    // Comparisons
+    MyEventType::StaticDelegateType staticDelegateReference(myStaticIntMethod);
+    VoidEventType::StaticDelegateType staticVoidDelegateReference(myStaticVoidMethod);
+    MyEventType::MemberDelegateType<MyCustomClass> memberDelegateReference(myCustomClassInstance, &MyCustomClass::myMemberMethod);
+
+    cout << (staticDelegateReference == staticDelegateReference) << endl;
+    cout << (staticDelegateReference == memberDelegateReference) << endl;
+    cout << (memberDelegateReference == memberDelegateReference) << endl;
+    cout << (memberDelegateReference == staticDelegateReference) << endl;
+
+    // Unlike comparisons
+    cout << (staticDelegateReference == staticVoidDelegateReference) << endl;
+    cout << (memberDelegateReference == staticVoidDelegateReference) << endl;
 
     // Cleanup
     delete cachedMemberDelegate;

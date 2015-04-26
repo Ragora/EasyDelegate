@@ -1,7 +1,7 @@
 /**
  *  @file mainpage.h
- *  @version 1.2
- *  @date 10/2/2014
+ *  @version 2.0
+ *  @date 4/26/2015
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *  @brief Main page file for use with Doxygen. This file does absolutely nothing otherwise.
  *
@@ -14,6 +14,7 @@
  *  @section Example
  *  This quick example below demonstrates how simple it is to utilize the EasyDelegate library, though for a more complete example
  *  please refer to ex_delegateset.cpp.
+ *
  *  @code
  *  class MyCustomClass
  *  {
