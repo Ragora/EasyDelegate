@@ -46,8 +46,7 @@ int main(int argc, char *argv[])
 
     // Register both our static function and our member function
     myDelegateSet.insert(myDelegateSet.end(), new MyEventType::StaticDelegateType(myStaticIntMethod));
-    myDelegateSet.insert(myDelegateSet.end(), new MyEventType::MemberDelegateType<MyCustomClass>(myCustomClassInstance, &MyCustomClass::myMemberMethod));
-
+    myDelegateSet.insert(myDelegateSet.end(), new MyEventType::MemberDelegateType<MyCustomClass>(&MyCustomClass::myMemberMethod, myCustomClassInstance));
 
     // This form works too.
     myDelegateSet += new MyEventType::StaticDelegateType(myStaticIntMethod);
@@ -58,10 +57,10 @@ int main(int argc, char *argv[])
 
     // Call the set via .invoke(), collecting returns into an std::set
     cout << "------------- CALLING VIA .invoke(), Getting Returns ---------------" << endl;
-    set<MyEventType::ReturnType> myReturnValues;
+    MyEventType::ReturnSetType myReturnValues;
     myDelegateSet.invoke(myReturnValues, "Foo", 3.14, 3.14159);
 
-    for (set<MyEventType::ReturnType>::iterator it = myReturnValues.begin(); it != myReturnValues.end(); it++)
+    for (MyEventType::ReturnSetType::iterator it = myReturnValues.begin(); it != myReturnValues.end(); it++)
         cout << *it << endl;
 
     // Iterate on our own, calling invoke() for each delegate
@@ -71,29 +70,29 @@ int main(int argc, char *argv[])
 
     // Remove a static listener function by address
     cout << "-------------- REMOVING STATIC LISTENERS -----------------" << endl;
-    myDelegateSet.remove_delegate_procaddress(myStaticIntMethod);
+    myDelegateSet.removeDelegateByMethod(myStaticIntMethod);
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
     // Remove a member listener function by address
     cout << "-------------- REMOVING MEMBER LISTENERS -----------------" << endl;
     myDelegateSet.push_back(new MyEventType::StaticDelegateType(myStaticIntMethod));
-    myDelegateSet.remove_delegate_procaddress(&MyCustomClass::myMemberMethod);
+    myDelegateSet.removeDelegateByMethod(&MyCustomClass::myMemberMethod);
 
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
     // Remove a member listener function by this pointer
-    std::cout << "-------------- REMOVING MEMBER LISTENERS VIA THIS -----------------" << endl;
-    myDelegateSet.push_back(new MyEventType::MemberDelegateType<MyCustomClass>(myCustomClassInstance, &MyCustomClass::myMemberMethod));
-    myDelegateSet.remove_delegate_this(myCustomClassInstance);
+    cout << "-------------- REMOVING MEMBER LISTENERS VIA THIS -----------------" << endl;
+    myDelegateSet.push_back(new MyEventType::MemberDelegateType<MyCustomClass>(&MyCustomClass::myMemberMethod, myCustomClassInstance));
+    myDelegateSet.removeDelegateByThisPointer(myCustomClassInstance);
 
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
     // Remove a delegate by it's address
     cout << "-------------- REMOVING DELEGATE VIA ADDRESS -----------------" << endl;
-    MyEventType::MemberDelegateType<MyCustomClass> *delegateToRemove = new MyEventType::MemberDelegateType<MyCustomClass>(myCustomClassInstance, &MyCustomClass::myMemberMethod);
+    MyEventType::MemberDelegateType<MyCustomClass> *delegateToRemove = new MyEventType::MemberDelegateType<MyCustomClass>(&MyCustomClass::myMemberMethod, myCustomClassInstance);
     myDelegateSet.push_back(delegateToRemove);
 
-    myDelegateSet.remove_delegate(delegateToRemove, false);
+    myDelegateSet.removeDelegate(delegateToRemove, false);
     myDelegateSet.invoke("Foo", 3.14, 3.14159);
 
     // delegateToRemove Still Exists
@@ -119,22 +118,22 @@ int main(int argc, char *argv[])
     for (unordered_set<EasyDelegate::GenericCachedDelegate *>::iterator it = delegates.begin(); it != delegates.end(); it++)
     {
         cout << "Invoking Delegate " << endl;
-        (*it)->generic_dispatch();
+        (*it)->genericDispatch();
     }
 
     // Comparisons
     MyEventType::StaticDelegateType staticDelegateReference(myStaticIntMethod);
     VoidEventType::StaticDelegateType staticVoidDelegateReference(myStaticVoidMethod);
-    MyEventType::MemberDelegateType<MyCustomClass> memberDelegateReference(myCustomClassInstance, &MyCustomClass::myMemberMethod);
+    MyEventType::MemberDelegateType<MyCustomClass> memberDelegateReference(&MyCustomClass::myMemberMethod, myCustomClassInstance);
 
-    cout << (staticDelegateReference == staticDelegateReference) << endl;
-    cout << (staticDelegateReference == memberDelegateReference) << endl;
-    cout << (memberDelegateReference == memberDelegateReference) << endl;
-    cout << (memberDelegateReference == staticDelegateReference) << endl;
+    cout << (staticDelegateReference.hasSameMethodAs(&staticDelegateReference)) << endl;
+    cout << (staticDelegateReference.hasSameMethodAs(&memberDelegateReference)) << endl;
+    cout << (memberDelegateReference.hasSameMethodAs(&memberDelegateReference)) << endl;
+    cout << (memberDelegateReference.hasSameMethodAs(&staticDelegateReference)) << endl;
 
     // Unlike comparisons
-    cout << (staticDelegateReference == staticVoidDelegateReference) << endl;
-    cout << (memberDelegateReference == staticVoidDelegateReference) << endl;
+    cout << (staticDelegateReference.hasSameMethodAs(&staticVoidDelegateReference)) << endl;
+    cout << (memberDelegateReference.hasSameMethodAs(&staticVoidDelegateReference)) << endl;
 
     // Cleanup
     delete cachedMemberDelegate;
