@@ -25,6 +25,10 @@
 // Define __forceinline if we're on GCC
 #if defined(__GNUC__) || defined(__GNUG__)
     #define __forceinline __attribute__((always_inline))
+// Otherwise, define noexcept
+#else
+	#define noexcept
+	#define constexpr
 #endif
 
 // If we're going to inline stuff, force it
@@ -52,7 +56,7 @@ namespace EasyDelegate
      *  @detail Taken from the chosen answer of http://stackoverflow.com/questions/12742877/remove-reference-from-stdtuple-members
      */
     template <typename... typenames>
-    using NoReferenceTuple = tuple<typename remove_reference<typenames>::type...>;
+    using NoReferenceTuple = std::tuple<typename std::remove_reference<typenames>::type...>;
 
     //! Helper typedef to a pointer of a static method with the given signature.
     template <typename returnType, typename... parameters>
@@ -171,7 +175,7 @@ namespace EasyDelegate
              *  @param methodPointer The address of the static method that this delegate
              *  is intended to invoke.
              */
-            StaticDelegate(const StaticDelegate::MethodPointer methodPointer) : DelegateBase<returnType, parameters...>(false), mMethodPointer(methodPointer) { }
+            StaticDelegate(const MethodPointer methodPointer) : DelegateBase<returnType, parameters...>(false), mMethodPointer(methodPointer) { }
 
             /**
              *  @brief Standard copy constructor.
@@ -215,7 +219,7 @@ namespace EasyDelegate
              *  @param methodPointer A pointer to the static method to be checked against.
              *  @return A boolean representing whether or not this StaticDelegate calls the given static method.
              */
-            bool callsMethod(const StaticDelegate::MethodPointer methodPointer) const noexcept { return methodPointer == mMethodPointer; };
+            bool callsMethod(const MethodPointer methodPointer) const noexcept { return methodPointer == mMethodPointer; };
 
             /**
              *  @brief Returns whether or not this StaticDelegate calls the given class member method.
@@ -280,7 +284,7 @@ namespace EasyDelegate
 
         private:
             //! Internal pointer to proc address to be called.
-            const StaticDelegate::MethodPointer mMethodPointer;
+            const MethodPointer mMethodPointer;
     };
 
     /**
@@ -305,7 +309,7 @@ namespace EasyDelegate
              *  pointer at any time has been deallocated. The MemberDelegate will cause undefined
              *  behavior and/or segfault upon invocation in that case.
              */
-            MemberDelegate(const MemberDelegate::MethodPointer methodPointer, classType *thisPointer) : mThisPointer(thisPointer),
+            MemberDelegate(const MethodPointer methodPointer, classType *thisPointer) : mThisPointer(thisPointer),
             mMethodPointer(methodPointer), DelegateBase<returnType, parameters...>(true) { }
 
             /**
@@ -355,7 +359,7 @@ namespace EasyDelegate
              *  @param methodPointer A pointer to a class member method to be checked against.
              *  @return A boolean representing whether or not this MemberDelegate calls the given class method pointer.
              */
-            bool callsMethod(const MemberDelegate::MethodPointer methodPointer) const noexcept { return mMethodPointer == methodPointer; }
+            bool callsMethod(const MethodPointer methodPointer) const noexcept { return mMethodPointer == methodPointer; }
 
             /**
              *  @brief Returns whether or not this MemberDelegate calls the given static method pointer.
@@ -413,7 +417,7 @@ namespace EasyDelegate
 
         private:
             //! An internal pointer to the proc address to be called.
-            const MemberDelegate::MethodPointer mMethodPointer;
+            const MethodPointer mMethodPointer;
     };
 
     /**
@@ -503,13 +507,13 @@ namespace EasyDelegate
              *  @brief Pushes a delegate instance to the end of the set.
              *  @param delegateInstance The delegate instance to the pushed onto the set.
              */
-            void push_back(DelegateSet::DelegateBaseType *delegateInstance)
+            void push_back(DelegateBaseType *delegateInstance)
             {
                 this->insert(this->end(), delegateInstance);
             }
 
             //! Alternate to push_back that looks a bit prettier in source.
-            void operator +=(DelegateSet::DelegateBaseType *delegateInstance)
+            void operator +=(DelegateBaseType *delegateInstance)
             {
                 this->push_back(delegateInstance);
             }
@@ -526,7 +530,7 @@ namespace EasyDelegate
              *  delegate tracking mechanism implemented by your project.
              */
             template <typename className>
-            void removeDelegateByMethod(DelegateSet::MemberDelegateFuncPtr<className> procAddress, bool deleteInstances=true, unordered_set<DelegateSet::DelegateBaseType *>* out=NULL)
+            void removeDelegateByMethod(MemberDelegateFuncPtr<className> procAddress, bool deleteInstances=true, unordered_set<DelegateBaseType *>* out=NULL)
             {
                 for (auto it = this->begin(); it != this->end(); it++)
                 {
@@ -555,7 +559,7 @@ namespace EasyDelegate
              *  @warning If deleteInstances is false and there is no out specified, you will be leaking memory if there is no other
              *  delegate tracking mechanism implemented by your project.
              */
-            void removeDelegateByMethod(DelegateSet::StaticDelegateFuncPtr methodPointer, const bool &deleteInstances=true, unordered_set<DelegateSet::DelegateBaseType *>* out=NULL)
+            void removeDelegateByMethod(StaticDelegateFuncPtr methodPointer, const bool &deleteInstances=true, unordered_set<DelegateBaseType *>* out=NULL)
             {
                 for (auto it = this->begin(); it != this->end(); it++)
                 {
@@ -584,7 +588,7 @@ namespace EasyDelegate
              *  @warning If deleteInstances is false and there is no out specified, you will be leaking memory if there is no other
              *  delegate tracking mechanism implemented by your project.
              */
-            void removeDelegateByThisPointer(const void *thisPtr, const bool &deleteInstances=true, unordered_set<DelegateSet::DelegateBaseType *>* out=NULL)
+            void removeDelegateByThisPointer(const void *thisPtr, const bool &deleteInstances=true, unordered_set<DelegateBaseType *>* out=NULL)
             {
                 for (auto it = this->begin(); it != this->end(); it++)
                 {
@@ -610,11 +614,11 @@ namespace EasyDelegate
              *  @return A pointer to the delegate that was removed. This is NULL if none were removed or
              *  if deleteInstance is true.
              */
-            DelegateSet::DelegateBaseType *removeDelegate(DelegateSet::DelegateBaseType *instance, const bool &deleteInstance=true)
+            DelegateBaseType *removeDelegate(DelegateBaseType *instance, const bool &deleteInstance=true)
             {
                 for (auto it = this->begin(); it != this->end(); it++)
                 {
-                    DelegateSet::DelegateBaseType *current = *it;
+                    DelegateBaseType *current = *it;
 
                     if (current == instance)
                     {
@@ -672,7 +676,7 @@ namespace EasyDelegate
              *  @note Always returns false for MemeberDelegate types because a MemberDelegate cannot invoke static
              *  functions.
              */
-            virtual bool callsMethod(const DelegateBase::StaticMethodPointerType methodPointer) const noexcept = 0;
+            virtual bool callsMethod(const StaticMethodPointerType methodPointer) const noexcept = 0;
 
             /**
              *  @brief Returns whether or not this delegate calls the given member proc address.
@@ -684,7 +688,7 @@ namespace EasyDelegate
              *  call member functions.
              */
             template <typename className>
-            bool callsMethod(const DelegateBase::MemberDelegateFuncPtr<className> procAddress) const noexcept
+            bool callsMethod(const MemberDelegateFuncPtr<className> procAddress) const noexcept
             {
                 // Don't try to check as a MemberDelegate if we're not actually one
                 if (!mIsMemberDelegate)
