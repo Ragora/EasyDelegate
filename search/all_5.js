@@ -1,5 +1,13 @@
 var searchData=
 [
-  ['has_5fprocaddress',['has_procaddress',['../classEasyDelegate_1_1StaticDelegate.html#af259208cc37d7660af8c522ee6ae763b',1,'EasyDelegate::StaticDelegate::has_procaddress()'],['../classEasyDelegate_1_1MemberDelegate.html#ae1ec2429a5a957c16f5f36d442e7b846',1,'EasyDelegate::MemberDelegate::has_procaddress(MemberDelegate::MemberDelegateFuncPtr procAddress)'],['../classEasyDelegate_1_1MemberDelegate.html#a1780b5c7a66f287cdf2c8ba9ddce7ec7',1,'EasyDelegate::MemberDelegate::has_procaddress(MemberDelegate::StaticDelegateFuncPtr funcPtr)']]],
-  ['has_5fthispointer',['has_thispointer',['../classEasyDelegate_1_1StaticDelegate.html#a429c794e4b7af666808b9baf8ce42c83',1,'EasyDelegate::StaticDelegate::has_thispointer()'],['../classEasyDelegate_1_1MemberDelegate.html#ac79fe3db1b495e8e6c778dab3d59faff',1,'EasyDelegate::MemberDelegate::has_thispointer()']]]
+  ['ideferredcaller',['IDeferredCaller',['../classEasyDelegate_1_1IDeferredCaller.html',1,'EasyDelegate']]],
+  ['idelegate',['IDelegate',['../classEasyDelegate_1_1IDelegate.html',1,'EasyDelegate']]],
+  ['idelegate',['IDelegate',['../classEasyDelegate_1_1IDelegate.html#a4fd3e81449870016dd7a6b85c07530f0',1,'EasyDelegate::IDelegate']]],
+  ['invalidmethodpointerexception',['InvalidMethodPointerException',['../classEasyDelegate_1_1InvalidMethodPointerException.html',1,'EasyDelegate']]],
+  ['invalidthispointerexception',['InvalidThisPointerException',['../classEasyDelegate_1_1InvalidThisPointerException.html',1,'EasyDelegate']]],
+  ['invoke',['invoke',['../classEasyDelegate_1_1StaticDelegate.html#a22969c530325d6db59097e4631a3874d',1,'EasyDelegate::StaticDelegate::invoke()'],['../classEasyDelegate_1_1MemberDelegate.html#aed8d3b084d1e5e11c7223f481955c08c',1,'EasyDelegate::MemberDelegate::invoke()'],['../classEasyDelegate_1_1ITypedDelegate.html#af5fc4d5a334cb89345452442986c5cdc',1,'EasyDelegate::ITypedDelegate::invoke()'],['../classEasyDelegate_1_1DelegateSet.html#a13c15604ac356f5efdcfb140b187f24b',1,'EasyDelegate::DelegateSet::invoke(parameters...params) const '],['../classEasyDelegate_1_1DelegateSet.html#aaf850faa430f196663c12cd24ee6f82a',1,'EasyDelegate::DelegateSet::invoke(std::set&lt; returnType &gt; &amp;out, parameters...params) const ']]],
+  ['itypeddeferredcaller',['ITypedDeferredCaller',['../classEasyDelegate_1_1ITypedDeferredCaller.html',1,'EasyDelegate']]],
+  ['itypeddelegate',['ITypedDelegate',['../classEasyDelegate_1_1ITypedDelegate.html',1,'EasyDelegate']]],
+  ['itypeddelegate',['ITypedDelegate',['../classEasyDelegate_1_1ITypedDelegate.html#a29b1fb9411a26392057b3d1d7d11c328',1,'EasyDelegate::ITypedDelegate']]],
+  ['itypeddelegate_3c_20returntype_2c_20parameters_2e_2e_2e_3e',['ITypedDelegate&lt; returnType, parameters...&gt;',['../classEasyDelegate_1_1ITypedDelegate.html',1,'EasyDelegate']]]
 ];

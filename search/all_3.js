@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['easydelegate',['EasyDelegate',['../namespaceEasyDelegate.html',1,'']]],
-  ['easydelegate_2ehpp',['easydelegate.hpp',['../easydelegate_8hpp.html',1,'']]],
-  ['empty',['empty',['../classEasyDelegate_1_1DelegateSet.html#a4df2c37b63ce7c7b81b41688cb7d9e60',1,'EasyDelegate::DelegateSet']]],
-  ['end',['end',['../classEasyDelegate_1_1DelegateSet.html#ac161dc968727ccd9b8e0aed41bb27299',1,'EasyDelegate::DelegateSet']]],
-  ['erase',['erase',['../classEasyDelegate_1_1DelegateSet.html#a90cfe2c9dcfc25930cbc0c73e9293a2e',1,'EasyDelegate::DelegateSet']]],
-  ['ex_5fdelegateset_2ecpp',['ex_delegateset.cpp',['../ex__delegateset_8cpp.html',1,'']]]
+  ['genericdispatch',['genericDispatch',['../classEasyDelegate_1_1IDeferredCaller.html#adb497c5783acdd6ae944b698d73cb9a2',1,'EasyDelegate::IDeferredCaller::genericDispatch()'],['../classEasyDelegate_1_1DeferredStaticCaller.html#a356022c08432e9d39541ec903e4858f8',1,'EasyDelegate::DeferredStaticCaller::genericDispatch()'],['../classEasyDelegate_1_1DeferredMemberCaller.html#a7762937490a2dc209c4d06e4685cb8d2',1,'EasyDelegate::DeferredMemberCaller::genericDispatch()']]],
+  ['gens',['gens',['../structEasyDelegate_1_1gens.html',1,'EasyDelegate']]],
+  ['gens_3c_200_2c_20s_2e_2e_2e_3e',['gens&lt; 0, S...&gt;',['../structEasyDelegate_1_1gens_3_010_00_01S_8_8_8_4.html',1,'EasyDelegate']]]
 ];

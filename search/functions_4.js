@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['generic_5fdispatch',['generic_dispatch',['../classEasyDelegate_1_1GenericCachedDelegate.html#a0a1ca63dcb6d2e845c3952a57d5fa8fd',1,'EasyDelegate::GenericCachedDelegate::generic_dispatch()'],['../classEasyDelegate_1_1CachedDelegate.html#a2db7dc12b4851a429820fdfb567e73ac',1,'EasyDelegate::CachedDelegate::generic_dispatch()']]],
-  ['genericcacheddelegate',['GenericCachedDelegate',['../classEasyDelegate_1_1GenericCachedDelegate.html#a95ea8b2c30988040ee069f2c5e37749a',1,'EasyDelegate::GenericCachedDelegate']]],
-  ['genericdelegate',['GenericDelegate',['../classEasyDelegate_1_1GenericDelegate.html#a6a956f131ab3d61813095c1802dc1a54',1,'EasyDelegate::GenericDelegate']]],
-  ['get_5fdelegate',['get_delegate',['../classEasyDelegate_1_1CachedDelegate.html#a856ee6ca55d74b7ed5a9e4cd268aeb7a',1,'EasyDelegate::CachedDelegate']]]
+  ['idelegate',['IDelegate',['../classEasyDelegate_1_1IDelegate.html#a4fd3e81449870016dd7a6b85c07530f0',1,'EasyDelegate::IDelegate']]],
+  ['invoke',['invoke',['../classEasyDelegate_1_1StaticDelegate.html#a22969c530325d6db59097e4631a3874d',1,'EasyDelegate::StaticDelegate::invoke()'],['../classEasyDelegate_1_1MemberDelegate.html#aed8d3b084d1e5e11c7223f481955c08c',1,'EasyDelegate::MemberDelegate::invoke()'],['../classEasyDelegate_1_1ITypedDelegate.html#af5fc4d5a334cb89345452442986c5cdc',1,'EasyDelegate::ITypedDelegate::invoke()'],['../classEasyDelegate_1_1DelegateSet.html#a13c15604ac356f5efdcfb140b187f24b',1,'EasyDelegate::DelegateSet::invoke(parameters...params) const '],['../classEasyDelegate_1_1DelegateSet.html#aaf850faa430f196663c12cd24ee6f82a',1,'EasyDelegate::DelegateSet::invoke(std::set&lt; returnType &gt; &amp;out, parameters...params) const ']]],
+  ['itypeddelegate',['ITypedDelegate',['../classEasyDelegate_1_1ITypedDelegate.html#a29b1fb9411a26392057b3d1d7d11c328',1,'EasyDelegate::ITypedDelegate']]]
 ];

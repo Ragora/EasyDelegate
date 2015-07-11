@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['performcachedcall',['performCachedCall',['../classEasyDelegate_1_1CachedDelegate.html#ac758d156e7b783d7114bf4d68f0a58d8',1,'EasyDelegate::CachedDelegate']]],
-  ['push_5fback',['push_back',['../classEasyDelegate_1_1DelegateSet.html#a36436c09a143c21ed527e72d23d89059',1,'EasyDelegate::DelegateSet']]]
+  ['staticdelegate',['StaticDelegate',['../classEasyDelegate_1_1StaticDelegate.html#a52da2097e5e7800c3b35ead4bfbb9f70',1,'EasyDelegate::StaticDelegate::StaticDelegate(const MethodPointer methodPointer)'],['../classEasyDelegate_1_1StaticDelegate.html#ad8d416ce5c4e670faec114ed705e77c3',1,'EasyDelegate::StaticDelegate::StaticDelegate(const StaticDelegate&lt; returnType, parameters...&gt; *other)']]]
 ];

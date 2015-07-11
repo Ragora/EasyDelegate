@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['iterator',['iterator',['../classEasyDelegate_1_1DelegateSet.html#a1a5f1d7c70764bc341c5324986ff725d',1,'EasyDelegate::DelegateSet']]]
+  ['noreferencetuple',['NoReferenceTuple',['../namespaceEasyDelegate.html#aabec9b89a1d2158101c4e14d0f680a61',1,'EasyDelegate']]]
 ];
