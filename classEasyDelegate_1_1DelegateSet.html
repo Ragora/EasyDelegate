@@ -98,6 +98,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">EasyDelegate::DelegateSet&lt; returnType, parameters &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A set of delegate instances that provides helper methods to invoke all contained delegates.  
+ <a href="classEasyDelegate_1_1DelegateSet.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="delegateset_8hpp_source.html">delegateset.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for EasyDelegate::DelegateSet&lt; returnType, parameters &gt;:</div>
 <div class="dyncontent">
@@ -189,6 +194,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename returnType, typename... parameters&gt;<br />
 class EasyDelegate::DelegateSet&lt; returnType, parameters &gt;</h3>
 
+<p>A set of delegate instances that provides helper methods to invoke all contained delegates. </p>
+<p>The <a class="el" href="classEasyDelegate_1_1DelegateSet.html" title="A set of delegate instances that provides helper methods to invoke all contained delegates. ">DelegateSet</a> type can be described as a sink for specific event types. Typical usage of this behavior would involve creating a typedef of a <a class="el" href="classEasyDelegate_1_1DelegateSet.html" title="A set of delegate instances that provides helper methods to invoke all contained delegates. ">DelegateSet</a> type for a specific method signature which then has its own specialized typedefs to facilitate the creation of <a class="el" href="classEasyDelegate_1_1StaticDelegate.html" title="A delegate of a static method. ">StaticDelegate</a> and <a class="el" href="classEasyDelegate_1_1MemberDelegate.html" title="A delegate of a class member method. ">MemberDelegate</a> types that are compatible with instances of this new specialized <a class="el" href="classEasyDelegate_1_1DelegateSet.html" title="A set of delegate instances that provides helper methods to invoke all contained delegates. ">DelegateSet</a> type. </p>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="example_8cpp-example.html#_a0">example.cpp</a>.</dd>
 </dl></div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a13c15604ac356f5efdcfb140b187f24b"></a>
@@ -455,7 +462,7 @@ template&lt;typename className &gt; </div>
   <table class="params">
     <tr><td class="paramname">method</td><td>The class method method poiner to check against. </td></tr>
     <tr><td class="paramname">deleteInstances</td><td>A boolean representing whether or not all matches should be deleted when removed. The default for this parameter is true for better memory management. </td></tr>
-    <tr><td class="paramname">out</td><td>A pointer to an std::unordered_set templated for the <a class="el" href="classEasyDelegate_1_1ITypedDelegate.html" title="Base delegate type. ">ITypedDelegate</a> type that this <a class="el" href="classEasyDelegate_1_1DelegateSet.html">DelegateSet</a> contains. This set will then be populated with a list of removed delegates if deleteInstances if false. If deleteInstances is true, this list will never be populated as the removed delegates are simply deleted. </td></tr>
+    <tr><td class="paramname">out</td><td>A pointer to an std::unordered_set templated for the <a class="el" href="classEasyDelegate_1_1ITypedDelegate.html" title="Base delegate type. ">ITypedDelegate</a> type that this <a class="el" href="classEasyDelegate_1_1DelegateSet.html" title="A set of delegate instances that provides helper methods to invoke all contained delegates. ">DelegateSet</a> contains. This set will then be populated with a list of removed delegates if deleteInstances if false. If deleteInstances is true, this list will never be populated as the removed delegates are simply deleted. </td></tr>
   </table>
   </dd>
 </dl>
@@ -508,7 +515,7 @@ template&lt;typename returnType , typename... parameters&gt; </div>
   <table class="params">
     <tr><td class="paramname">methodPointer</td><td>The static method pointer to check against. </td></tr>
     <tr><td class="paramname">deleteInstances</td><td>A boolean representing whether or not all matches should be deleted when removed. The default for this parameter is true for better memory management. </td></tr>
-    <tr><td class="paramname">out</td><td>A pointer to an std::unordered_set templated for the <a class="el" href="classEasyDelegate_1_1ITypedDelegate.html" title="Base delegate type. ">ITypedDelegate</a> type that this <a class="el" href="classEasyDelegate_1_1DelegateSet.html">DelegateSet</a> contains. This set will then be populated with a list of removed delegates if deleteInstances is false. If deleteInstances is true, then this list will never be populated as the removed delegates are simply destroyed. </td></tr>
+    <tr><td class="paramname">out</td><td>A pointer to an std::unordered_set templated for the <a class="el" href="classEasyDelegate_1_1ITypedDelegate.html" title="Base delegate type. ">ITypedDelegate</a> type that this <a class="el" href="classEasyDelegate_1_1DelegateSet.html" title="A set of delegate instances that provides helper methods to invoke all contained delegates. ">DelegateSet</a> contains. This set will then be populated with a list of removed delegates if deleteInstances is false. If deleteInstances is true, then this list will never be populated as the removed delegates are simply destroyed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -561,7 +568,7 @@ template&lt;typename returnType , typename... parameters&gt; </div>
   <table class="params">
     <tr><td class="paramname">thisPtr</td><td>The address of the object to check against. </td></tr>
     <tr><td class="paramname">deleteInstances</td><td>A boolean representing whether or not all matches should be deleted when removed. The default for this parameter is true for better memory management. </td></tr>
-    <tr><td class="paramname">out</td><td>A pointer to an std::unordered_set templated for the <a class="el" href="classEasyDelegate_1_1ITypedDelegate.html" title="Base delegate type. ">ITypedDelegate</a> type that this <a class="el" href="classEasyDelegate_1_1DelegateSet.html">DelegateSet</a> contains. This set will then be populated with a list of removed delegates if deleteInstances is false. If deleteInstances is true, then this list will never be populated as the removed delegates are simply deleted. </td></tr>
+    <tr><td class="paramname">out</td><td>A pointer to an std::unordered_set templated for the <a class="el" href="classEasyDelegate_1_1ITypedDelegate.html" title="Base delegate type. ">ITypedDelegate</a> type that this <a class="el" href="classEasyDelegate_1_1DelegateSet.html" title="A set of delegate instances that provides helper methods to invoke all contained delegates. ">DelegateSet</a> contains. This set will then be populated with a list of removed delegates if deleteInstances is false. If deleteInstances is true, then this list will never be populated as the removed delegates are simply deleted. </td></tr>
   </table>
   </dd>
 </dl>
@@ -575,7 +582,7 @@ template&lt;typename returnType , typename... parameters&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jul 11 2015 03:53:59 for EasyDelegate by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jul 11 2015 04:10:03 for EasyDelegate by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
