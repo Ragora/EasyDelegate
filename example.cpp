@@ -5,7 +5,7 @@
  *  @author Robert MacGregor
  *
  *  @copyright This software is licensed under the MIT license. Please refer to LICENSE.txt for more
- *	information.
+ *  information.
  */
 
 #define EASYDELEGATE_FORCE_INLINE

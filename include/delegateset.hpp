@@ -29,7 +29,6 @@ namespace EasyDelegate
      *  for a specific method signature which then has its own specialized typedefs to facilitate
      *  the creation of StaticDelegate and MemberDelegate types that are compatible with instances
      *  of this new specialized DelegateSet type.
-     *  @example example.cpp
      */
     template <typename returnType, typename... parameters>
     class DelegateSet : public std::set<ITypedDelegate<returnType, parameters...> *>

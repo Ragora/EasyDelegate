@@ -1,9 +1,10 @@
 /**
  *  @file mainpage.h
- *  @date 5/2/2015
+ *  @date 7/11/2015
  *  @version 2.0
  *  @brief Main page file for use with Doxygen. This file does absolutely nothing otherwise.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
+ *  @example example.cpp
  *
  *  @mainpage Welcome
  *  EasyDelegate is, as the name implies, a <a href="http://msdn.microsoft.com/en-us/library/ms173171.aspx">delegate system.</a>
