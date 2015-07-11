@@ -19,4 +19,4 @@ IF (CMAKE_COMPILER_IS_GNUCXX)
 ENDIF (CMAKE_COMPILER_IS_GNUCXX)
 
 INCLUDE_DIRECTORIES ("include/")
-ADD_EXECUTABLE (${EX_BUILDLOCATION} "example.cpp" "include/easydelegate.hpp" "include/mainpage.h")
+ADD_EXECUTABLE (${EX_BUILDLOCATION} "example.cpp" "include/deferredcallers.hpp" "include/delegateset.hpp" "include/easydelegate.hpp" "include/exceptions.hpp" "include/mainpage.h" "include/delegates.hpp" "include/types.hpp")
