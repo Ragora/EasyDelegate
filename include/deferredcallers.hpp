@@ -2,8 +2,8 @@
  *  @file deferredcallers.hpp
  *  @date 7/11/2015
  *  @version 2.0
- *  @brief Include file declaring various helper types used by the EasyDelegate library. They
- *  may also aid programmers using the library as well.
+ *  @brief Include file declaring the deferred caller types for use in systems where
+ *  deferred calls is a necessity.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *
  *  @copyright This software is licensed under the MIT license. Refer to LICENSE.txt for more

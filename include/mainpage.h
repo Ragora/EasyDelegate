@@ -9,7 +9,7 @@
  *  EasyDelegate is, as the name implies, a <a href="http://msdn.microsoft.com/en-us/library/ms173171.aspx">delegate system.</a>
  *  It is written for C++11 with the intention to allow C++ programmers to easily create references to static and member methods
  *  that may be passed around like any other variable and invoked at any point in the code. This is helpful for a variety of situations,
- *  such as a <a href="http://en.wikipedia.org/wiki/Sink_(computing)">event/listener implementation</a>.
+ *  such as an <a href="http://en.wikipedia.org/wiki/Sink_(computing)">event/listener implementation</a>.
  *
  *  @section Example
  *  This quick example below demonstrates how simple it is to utilize the EasyDelegate library, though for a more complete example,
@@ -88,7 +88,7 @@
  *  <ul>
  *      <li><a href="https://gcc.gnu.org/">GCC 4.8.4</a> on Gentoo AMD64</li>
  *      <li><a href="http://www.mingw.org/">MinGW 4.8.1</a> on Windows 7 x64</li>
- *      <li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=34673">Microsoft Visual Studio 2012 Express</a> on Windows 7 x64</li>
+ *      <li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=34673">Microsoft Visual Studio C++ 2012 Express</a> on Windows 7 x64</li>
  *  </ul>
  *
  *  It should compile and run underneath of any compiler that at least supports <a href="http://en.wikipedia.org/wiki/Variadic_template">variadic templates</a>,
@@ -97,7 +97,7 @@
  *  is not an option, then it should be relatively easy to switch EasyDelegate to the preferred container types for your project.
  *
  *  <b>Note for MinGW/GCC Users:</b><br>
- *  EasyDelegate has been known to fail compilation (and possibly crash) on MinGW 4.7, and the same bugs probably exist in *nix native GCC. Please ensure
+ *  EasyDelegate has been known to fail compilation (and possibly crash the compiler) on MinGW 4.7, and the same bugs probably exist in *nix native GCC. Please ensure
  *  that you are running at least GCC 4.8 when building a project with EasyDelegate.
  *
  *  @section Limits Limitations
@@ -106,7 +106,15 @@
  *  functionality is necessary to your project would be to use a void* declaration instead and use that to pass a struct in which is then casted to the proper struct
  *  type on the called method's end. There may be a way to properly implement variadic method support, but I have not come up with anything yet.
  *
- *  @section Links Links
+ *  @section Links Links & Attributions
+ *  The vast majority of this library was written by Robert MacGregor, licensed under the MIT license for the open source community. There exists
+ *  two small types that were pulled from StackOverflow which were quite imperative to the functioning of the deferred calling systems:
+ *  <ul>
+ *      <li><a href="http://stackoverflow.com/questions/7858817/unpacking-a-tuple-to-call-a-matching-function-pointer">The seq and gens types</a></li>
+ *      <li><a href="http://stackoverflow.com/questions/12742877/remove-reference-from-stdtuple-members">The helpful no-reference tuple declaration</a></li>
+ *  </ul>
+ *
+ *  Other Links:
  *  <ul>
  *      <li><a href="http://dx.no-ip.org">Author: Robert MacGregor</a></li>
  *      <li><a href="https://github.com/Ragora/EasyDelegate">EasyDelegate on GitHub</a></li>
