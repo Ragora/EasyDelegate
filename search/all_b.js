@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['seq',['seq',['../structEasyDelegate_1_1seq.html',1,'EasyDelegate']]],
   ['staticdelegate',['StaticDelegate',['../classEasyDelegate_1_1StaticDelegate.html',1,'EasyDelegate']]],
   ['staticdelegate',['StaticDelegate',['../classEasyDelegate_1_1StaticDelegate.html#a52da2097e5e7800c3b35ead4bfbb9f70',1,'EasyDelegate::StaticDelegate::StaticDelegate(const MethodPointer methodPointer)'],['../classEasyDelegate_1_1StaticDelegate.html#ad8d416ce5c4e670faec114ed705e77c3',1,'EasyDelegate::StaticDelegate::StaticDelegate(const StaticDelegate&lt; returnType, parameters...&gt; *other)']]],
   ['staticdelegatefuncptr',['StaticDelegateFuncPtr',['../classEasyDelegate_1_1DelegateSet.html#a7789365e8e72a1060b57fae8315df22d',1,'EasyDelegate::DelegateSet']]],
