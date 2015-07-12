@@ -120,4 +120,8 @@
  *      <li><a href="http://dx.no-ip.org">Author: Robert MacGregor</a></li>
  *      <li><a href="https://github.com/Ragora/EasyDelegate">EasyDelegate on GitHub</a></li>
  *  </ul>
+ * 
+ *  @htmlonly
+ *  <center><a href="https://www.biicode.com/Ragora/EasyDelegate"><img src="https://webapi.biicode.com/v1/badges/Ragora/Ragora/EasyDelegate/master"></a></center>
+ *  @endhtmlonly
  */
