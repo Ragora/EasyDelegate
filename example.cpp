@@ -14,7 +14,7 @@
 #include <unordered_set>    // std::unordered_set
 #include <iostream>         // std::cout, std::endl
 
-#include <easydelegate.hpp>
+#include <easydelegate/easydelegate.hpp>
 
 using namespace std;
 
