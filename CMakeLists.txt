@@ -3,20 +3,20 @@
 # This software is licensed under the MIT license. Please refer to
 # LICENSE.txt for more information.
 
+IF(BIICODE)
+   INCLUDE("biicode.cmake")
+   RETURN()
+ENDIF()
+
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 PROJECT (EasyDelegate)
 
-SET (EX_BUILDLOCATION "example")
-
-# If we're on windows, make the output name have the exe extension
-IF (WIN32)
-	SET (EX_BUILDLOCATION "${EX_BUILDLOCATION}.exe")
-ENDIF (WIN32)
-
 # If we're on GCC, set the c++11 compilation flag.
 IF (CMAKE_COMPILER_IS_GNUCXX)
-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
+        SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
 ENDIF (CMAKE_COMPILER_IS_GNUCXX)
 
+SET (EX_BUILDLOCATION "example")
+
 INCLUDE_DIRECTORIES ("include/")
-ADD_EXECUTABLE (${EX_BUILDLOCATION} "example.cpp" "include/deferredcallers.hpp" "include/delegateset.hpp" "include/easydelegate.hpp" "include/exceptions.hpp" "include/mainpage.h" "include/delegates.hpp" "include/types.hpp")
+ADD_EXECUTABLE (${EX_BUILDLOCATION} "example.cpp" "include/easydelegate/deferredcallers.hpp" "include/easydelegate/delegateset.hpp" "include/easydelegate/easydelegate.hpp" "include/easydelegate/exceptions.hpp" "include/easydelegate/mainpage.h" "include/easydelegate/delegates.hpp" "include/easydelegate/types.hpp")
