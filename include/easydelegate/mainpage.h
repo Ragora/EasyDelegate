@@ -1,7 +1,7 @@
 /**
  *  @file mainpage.h
- *  @date 7/11/2015
- *  @version 2.0
+ *  @date 5/25/2016
+ *  @version 2.2
  *  @brief Main page file for use with Doxygen. This file does absolutely nothing otherwise.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *  @example example.cpp
@@ -120,7 +120,7 @@
  *      <li><a href="http://dx.no-ip.org">Author: Robert MacGregor</a></li>
  *      <li><a href="https://github.com/Ragora/EasyDelegate">EasyDelegate on GitHub</a></li>
  *  </ul>
- * 
+ *
  *  @htmlonly
  *  <center><a href="https://www.biicode.com/Ragora/EasyDelegate"><img src="https://webapi.biicode.com/v1/badges/Ragora/Ragora/EasyDelegate/master"></a></center>
  *  @endhtmlonly

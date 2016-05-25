@@ -1,7 +1,7 @@
 /**
  *  @file easydelegate.hpp
- *  @date 5/7/2016
- *  @version 2.1
+ *  @date 5/25/2016
+ *  @version 2.2
  *  @brief Main include file for the EasyDelegate library.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *

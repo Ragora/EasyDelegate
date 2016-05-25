@@ -1,7 +1,7 @@
 /**
  *  @file deferredcallers.hpp
- *  @date 5/7/2016
- *  @version 2.1
+ *  @date 5/25/2016
+ *  @version 2.2
  *  @brief Include file declaring the deferred caller types for use in systems where
  *  deferred calls is a necessity.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>

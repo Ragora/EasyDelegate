@@ -1,7 +1,7 @@
 /**
  *  @file delegates.hpp
- *  @date 5/7/2016
- *  @version 2.1
+ *  @date 5/25/2016
+ *  @version 2.2
  *  @brief Include file declaring various delegate types.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *
@@ -236,7 +236,7 @@ namespace EasyDelegate
                 if (!mMethodPointer)
                     throw InvalidMethodPointerException();
 
-                classType *thisPointer = (classType*)thisPointer;
+                classType *thisPointer = (classType*)mThisPointer;
                 return (thisPointer->*mMethodPointer)(params...);
             }
 

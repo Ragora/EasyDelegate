@@ -1,7 +1,7 @@
 /**
  *  @file exceptions.hpp
- *  @date 5/7/2016
- *  @version 2.1
+ *  @date 5/25/2016
+ *  @version 2.2
  *  @brief Include file containing the definitions for all exception types thrown by the
  *  EasyDelegate library.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
