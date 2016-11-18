@@ -19,4 +19,15 @@ ENDIF (CMAKE_COMPILER_IS_GNUCXX)
 SET (EX_BUILDLOCATION "example")
 
 INCLUDE_DIRECTORIES ("include/")
-ADD_EXECUTABLE (${EX_BUILDLOCATION} "example.cpp" "include/easydelegate/deferredcallers.hpp" "include/easydelegate/delegateset.hpp" "include/easydelegate/easydelegate.hpp" "include/easydelegate/exceptions.hpp" "include/easydelegate/mainpage.h" "include/easydelegate/delegates.hpp" "include/easydelegate/types.hpp")
+ADD_EXECUTABLE (${EX_BUILDLOCATION} "example.cpp"
+"include/easydelegate/deferredcallers.hpp"
+"include/easydelegate/delegateset.hpp"
+"include/easydelegate/easydelegate.hpp"
+"include/easydelegate/exceptions.hpp"
+"include/easydelegate/mainpage.h"
+"include/easydelegate/delegates.hpp"
+"include/easydelegate/types.hpp"
+
+"include/easydelegate/delegatesCompat.hpp"
+"include/easydelegate/delegatesetCompat.hpp"
+)
