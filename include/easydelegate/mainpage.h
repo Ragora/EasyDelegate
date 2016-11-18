@@ -1,7 +1,7 @@
 /**
  *  @file mainpage.h
- *  @date 5/25/2016
- *  @version 2.2
+ *  @date 11/17/2016
+ *  @version 3.0
  *  @brief Main page file for use with Doxygen. This file does absolutely nothing otherwise.
  *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
  *  @example example.cpp
