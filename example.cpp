@@ -49,8 +49,13 @@ int main(int argc, char *argv[])
     MyCustomClass *myCustomClassInstance = new MyCustomClass();
 
     // Register both our static function and our member function
-    myDelegateSet.insert(myDelegateSet.end(), new MyEventType::StaticDelegateType(myStaticIntMethod));
-    myDelegateSet.insert(myDelegateSet.end(), new MyEventType::MemberDelegateType<MyCustomClass>(&MyCustomClass::myMemberMethod, myCustomClassInstance));
+    myDelegateSet.push_back(new MyEventType::StaticDelegateType(myStaticIntMethod));
+    myDelegateSet.push_back(new MyEventType::MemberDelegateType<MyCustomClass>(&MyCustomClass::myMemberMethod, myCustomClassInstance));
+    myDelegateSet.push_back(new MyEventType::FunctionDelegateType([](const char* str, const float& flt, const double& dbl)->unsigned int
+    {
+        cout << "A lambda call: " << str << ", " << flt << ", " << dbl << endl;
+        return 25;
+    }));
 
     // This form works too.
     myDelegateSet += new MyEventType::StaticDelegateType(myStaticIntMethod);
@@ -114,10 +119,10 @@ int main(int argc, char *argv[])
         MyCachedVoidStaticDelegateType *cachedStaticDelegate = new MyCachedVoidStaticDelegateType(myStaticVoidMethod, 8.15f, "Cached", 3.14f);
 
         // Now store these in a set
-        unordered_set<EasyDelegate::IDeferredCaller *> delegates;
+        vector<EasyDelegate::IDeferredCaller *> delegates;
 
-        delegates.insert(delegates.end(), cachedMemberDelegate);
-        delegates.insert(delegates.end(), cachedStaticDelegate);
+        delegates.push_back(cachedMemberDelegate);
+        delegates.push_back(cachedStaticDelegate);
 
         // Iterate
         for (auto it = delegates.begin(); it != delegates.end(); it++)
@@ -146,6 +151,7 @@ int main(int argc, char *argv[])
         delete cachedMemberDelegate;
         delete cachedStaticDelegate;
     #endif
+
     delete myCustomClassInstance;
 
     return 0;
