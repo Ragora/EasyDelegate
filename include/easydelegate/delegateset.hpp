@@ -3,7 +3,7 @@
  *  @date 11/17/2016
  *  @version 3.0
  *  @brief Include file containing the definition for the DelegateSet class
- *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
+ *  @author <a href="https://dx.no-ip.org">Robert MacGregor</a>
  *
  *  @copyright This software is licensed under the MIT license. Refer to LICENSE.txt for more
  *	information.

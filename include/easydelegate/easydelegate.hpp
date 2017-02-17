@@ -3,10 +3,10 @@
  *  @date 11/17/2016
  *  @version 3.0
  *  @brief Main include file for the EasyDelegate library.
- *  @author <a href="http://dx.no-ip.org">Robert MacGregor</a>
+ *  @author <a href="https://dx.no-ip.org">Robert MacGregor</a>
  *
  *  @copyright This software is licensed under the MIT license. Refer to LICENSE.txt for more
- *	information.
+ *  information.
  */
 
 #ifndef _INCLUDE_EASYDELEGATE_HPP_
@@ -47,12 +47,12 @@
 #include "types.hpp"
 
 #if __cplusplus >= 201103L
-#include "delegates.hpp"
-#include "delegateset.hpp"
-#include "deferredcallers.hpp"
+    #include "delegates.hpp"
+    #include "delegateset.hpp"
+    #include "deferredcallers.hpp"
 #else
-#include "delegatesCompat.hpp"
-#include "delegatesetCompat.hpp"
+    #include "delegatesCompat.hpp"
+    #include "delegatesetCompat.hpp"
 #endif
 
 //! Namespace containing all EasyDelegate functionality.

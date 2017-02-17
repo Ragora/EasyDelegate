@@ -2,7 +2,7 @@
  *  @file example.cpp
  *  @brief Example coding demonstrating the usage of EasyDelegate.
  *  @date 7/11/2015
- *  @author Robert MacGregor
+ *  @author <a href="https://dx.no-ip.org">Robert MacGregor</a>
  *
  *  @copyright This software is licensed under the MIT license. Please refer to LICENSE.txt for more
  *  information.
@@ -18,13 +18,13 @@
 
 using namespace std;
 
-unsigned int myStaticIntMethod(const char *str, const float &flt, const double &dbl)
+unsigned int myStaticIntMethod(const char* str, const float& flt, const double& dbl)
 {
     cout << "myStaticIntMethod: " << str << "," << flt << "," << dbl << endl;
     return 5;
 }
 
-void myStaticVoidMethod(const float &flt, const char *str, const double &dbl)
+void myStaticVoidMethod(const float& flt, const char* str, const double& dbl)
 {
     cout << "myStaticVoidMethod: " << flt << "," << str << "," << dbl << endl;
 }
@@ -32,7 +32,7 @@ void myStaticVoidMethod(const float &flt, const char *str, const double &dbl)
 class MyCustomClass
 {
     public:
-        unsigned int myMemberMethod(const char *str, const float &flt, const double &dbl)
+        unsigned int myMemberMethod(const char* str, const float& flt, const double &dbl)
         {
             cout << "MyCustomClass::myMemberMethod: " << str << "," << flt << "," << dbl << endl;
             return 2;
@@ -115,8 +115,8 @@ int main(int argc, char *argv[])
         typedef EasyDelegate::DeferredStaticCaller<void, const float&, const char*, const double&> MyCachedVoidStaticDelegateType;
 
         // Allocate our delegate types
-        MyCachedIntMemberDelegateType *cachedMemberDelegate = new MyCachedIntMemberDelegateType(&MyCustomClass::myMemberMethod, myCustomClassInstance, "Cached", 3.14, 3.14159);
-        MyCachedVoidStaticDelegateType *cachedStaticDelegate = new MyCachedVoidStaticDelegateType(myStaticVoidMethod, 8.15f, "Cached", 3.14f);
+        MyCachedIntMemberDelegateType* cachedMemberDelegate = new MyCachedIntMemberDelegateType(&MyCustomClass::myMemberMethod, myCustomClassInstance, "Cached", 3.14, 3.14159);
+        MyCachedVoidStaticDelegateType* cachedStaticDelegate = new MyCachedVoidStaticDelegateType(myStaticVoidMethod, 8.15f, "Cached", 3.14f);
 
         // Now store these in a set
         vector<EasyDelegate::IDeferredCaller *> delegates;
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
         delegates.push_back(cachedStaticDelegate);
 
         // Iterate
-        for (auto it = delegates.begin(); it != delegates.end(); it++)
+        for (auto it = delegates.begin(); it != delegates.end(); ++it)
         {
             cout << "Invoking Delegate " << endl;
             (*it)->genericDispatch();
