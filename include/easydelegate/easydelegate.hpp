@@ -12,12 +12,14 @@
 #ifndef _INCLUDE_EASYDELEGATE_HPP_
 #define _INCLUDE_EASYDELEGATE_HPP_
 
+#define ISCPP11 __cplusplus >= 199711L
+
 // Define __forceinline if we're on GCC
 #if defined(__GNUC__) || defined(__GNUG__)
     #define __forceinline __attribute__((always_inline))
 
     // These keywords don't mean anything if we're compiling with an old standard
-    #if __cplusplus >= 201103L
+    #if ISCPP11
         #define EASYDELEGATE_NOEXCEPT noexcept
         #define EASYDELEGATE_CONSTEXPR constexpr
     #else
@@ -37,7 +39,7 @@
 #endif
 
 // If we're going to inline stuff, force it
-#if defined(EASYDELEGATE_FORCE_INLINE) && __cplusplus >= 201103L
+#if defined(EASYDELEGATE_FORCE_INLINE) && ISCPP11
     #define EASYDELEGATE_INLINE __forceinline
 #else
     //! A preprocessor definition for a keyword that forces the inlining of a given method.
@@ -46,7 +48,7 @@
 
 #include "types.hpp"
 
-#if __cplusplus >= 201103L
+#if ISCPP11
     #include "delegates.hpp"
     #include "delegateset.hpp"
     #include "deferredcallers.hpp"

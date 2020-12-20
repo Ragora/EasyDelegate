@@ -60,7 +60,7 @@ namespace EasyDelegate
         using NoReferenceTuple = std::tuple<typename std::remove_reference<typenames>::type...>;
     #endif // EASYDELEGATE_NO_DEFERRED_CALLING
 
-    #if __cplusplus >= 201103L
+    #if ISCPP11
         //! Helper typedef to a pointer of a static method with the given signature.
         template <typename returnType, typename... parameters>
         using StaticMethodPointer = returnType(*)(parameters...);

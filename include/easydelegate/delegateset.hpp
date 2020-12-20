@@ -9,7 +9,7 @@
  *	information.
  */
 
-#if !defined(_INCLUDE_EASYDELEGATE_DELEGATESET_HPP_) && __cplusplus >= 201103L
+#if !defined(_INCLUDE_EASYDELEGATE_DELEGATESET_HPP_) && ISCPP11
 #define _INCLUDE_EASYDELEGATE_DELEGATESET_HPP_
 
 #include <vector>
