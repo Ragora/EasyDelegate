@@ -43,6 +43,11 @@ namespace EasyDelegate
              *  @note Always returns false for static deferred caller types because they do not use a this pointer.
              */
 			EASYDELEGATE_INLINE virtual bool hasThisPointer(const void* thisPointer) const EASYDELEGATE_NOEXCEPT{ return false; }
+
+            /**
+             *  @brief Destructor. Currently mostly used to resolve compiler warnings about non-virtual destructors.
+             */
+            virtual ~IDeferredCaller() { }
     };
 
     /**

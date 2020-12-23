@@ -431,6 +431,11 @@ namespace EasyDelegate
 			ITypedDelegate(const bool& isMemberDelegate) EASYDELEGATE_NOEXCEPT : IDelegate(isMemberDelegate) { }
 
             /**
+             *  @brief Destructor. Right now primarily used to resolve compiler warnings about non-virtual desrtructors.
+             */
+            virtual ~ITypedDelegate() { }
+
+            /**
              *  @brief Returns whether or not this delegate calls the given static method.
              *  @param methodPointer A pointer to the static method to be checked against.
              *  @return A boolean representing whether or not this delegate calls the given proc address.
